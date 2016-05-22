@@ -26,3 +26,6 @@ def collect_sums(n):
         else:
             sums[sum] = [(a, b)]
     return sums
+
+def filter_dict(d):
+    return { x: d[x] for x in d if len(d[x]) > 1 }

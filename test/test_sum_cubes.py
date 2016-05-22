@@ -1,6 +1,6 @@
 import unittest
 
-from sum_of_cubes import go, create_triangle, collect_sums
+from sum_of_cubes import go, create_triangle, collect_sums, filter_dict
 
 class TestFirstCut(unittest.TestCase):
     def test_go(self):
@@ -17,3 +17,8 @@ class TestHelpers(unittest.TestCase):
         self.assertTrue(2 in result)
         self.assertTrue(9 in result)
         self.assertTrue(16 in result)
+
+    def test_filter_dict(self):
+        d = { 1: [ 1, 2 ], 2: [ 1], 3: [ 1, 2, 3 ] }
+        result = filter_dict(d)
+        self.assertEqual(result, { 1: [1, 2], 3: [1, 2, 3]})
