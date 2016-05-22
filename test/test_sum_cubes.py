@@ -1,0 +1,13 @@
+import unittest
+
+from sum_of_cubes import go, create_triangle
+
+class TestFirstCut(unittest.TestCase):
+    def test_go(self):
+        result = go(13)
+        self.assertEqual(result, [(10, 9, 12, 1)])
+
+class TestHelpers(unittest.TestCase):
+    def test_triangle(self):
+        result = create_triangle(3)
+        self.assertEqual(result, [(1,1), (2,1), (2,2), (3,1), (3,2), (3,3)])
