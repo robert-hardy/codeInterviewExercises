@@ -34,4 +34,4 @@ def go_for_it(n):
     return filter_dict(collect_sums(n))
 
 if __name__ == '__main__':
-    print go_for_it(100)
+    print go_for_it(1000)
