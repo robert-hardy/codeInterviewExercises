@@ -1,6 +1,6 @@
 import unittest
 
-from sum_of_cubes import go, create_triangle
+from sum_of_cubes import go, create_triangle, collect_sums
 
 class TestFirstCut(unittest.TestCase):
     def test_go(self):
@@ -11,3 +11,9 @@ class TestHelpers(unittest.TestCase):
     def test_triangle(self):
         result = create_triangle(3)
         self.assertEqual(result, [(1,1), (2,1), (2,2), (3,1), (3,2), (3,3)])
+
+    def test_collect_sums(self):
+        result = collect_sums(20)
+        self.assertTrue(2 in result)
+        self.assertTrue(9 in result)
+        self.assertTrue(16 in result)
