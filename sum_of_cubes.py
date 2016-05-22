@@ -10,6 +10,6 @@ def find_one_pair():
     return { x: count[x] for x in count if len(count[x]) != 1 }
 
 def create_triangle():
-    lst = range(1000)
+    lst = range(1, 1001)
     triangle = [ (a, b) for a in lst for b in lst if b <= a ]
     return triangle
