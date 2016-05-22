@@ -1,13 +1,13 @@
 def find_one_pair():
     triangle = create_triangle()
-    all_sums = [ a^3 + b^3 for (a, b) in triangle ]
     count = dict()
-    for x in all_sums:
+    for (a, b) in triangle:
+        x = a^3+b^3
         if x in count:
-            count[x] = count[x] + 1
+            count[x].append((a,b))
         else:
-            count[x] = 1
-    return { x: count[x] for x in count if count[x] != 1 }
+            count[x] = [(a,b)]
+    return { x: count[x] for x in count if len(count[x]) != 1 }
 
 def create_triangle():
     lst = range(1000)
