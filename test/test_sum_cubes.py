@@ -1,6 +1,6 @@
 import unittest
 
-from sum_of_cubes import create_triangle, collect_sums, filter_dict, go_for_it
+from sum_of_cubes import create_triangle, collect_sums, filter_dict, go_for_it, order_dict
 
 class TestHelpers(unittest.TestCase):
     def test_triangle(self):
@@ -17,6 +17,11 @@ class TestHelpers(unittest.TestCase):
         d = { 1: [ 1, 2 ], 2: [ 1], 3: [ 1, 2, 3 ] }
         result = filter_dict(d)
         self.assertEqual(result, { 1: [1, 2], 3: [1, 2, 3]})
+
+    def test_order_dict(self):
+        d = { 1: [ 1, 2 ], 2: [ 1], 3: [ 1, 2, 3 ] }
+        result = order_dict(d)
+        self.assertEqual(result, [ (2, [ 1 ]), (1, [1, 2]), (3, [ 1, 2, 3 ]) ])
 
 class TestMain(unittest.TestCase):
     def test_all(self):

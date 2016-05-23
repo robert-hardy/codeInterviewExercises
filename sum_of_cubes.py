@@ -15,6 +15,9 @@ def collect_sums(n):
 def filter_dict(d):
     return { x: d[x] for x in d if len(d[x]) > 1 }
 
+def order_dict(d):
+    return sorted([ (x, d[x]) for x in d ], key = lambda x: len(x[1]))
+
 def go_for_it(n):
     return filter_dict(collect_sums(n))
 
