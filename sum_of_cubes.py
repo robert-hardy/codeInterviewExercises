@@ -22,5 +22,5 @@ def go_for_it(n):
     return filter_dict(collect_sums(n))
 
 if __name__ == '__main__':
-    for x in order_dict(go_for_it(5000)):
+    for x in order_dict(go_for_it(1000)):
         print x
