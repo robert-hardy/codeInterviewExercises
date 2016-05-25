@@ -26,3 +26,20 @@ def remove_duplicates(ll):
             vals = vals + head.value()
         head = head.next()
     return create_ll(vals)
+
+def remove_duplicates_without_buffer(ll):
+    return ll
+
+def trim_duplicates_from_front(ll):
+    head = ll
+    while is_in(head.value(), head.next()):
+        head = head.next()
+    return head
+
+def is_in(val, ll):
+    head = ll
+    while head.value() is not None:
+        if head.value() == val:
+            return True
+        head = head.next()
+    return False

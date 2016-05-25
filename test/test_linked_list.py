@@ -1,6 +1,12 @@
 import unittest
 
-from linked_list import create_ll, li, remove_duplicates
+from linked_list import (
+    create_ll,
+    li,
+    remove_duplicates,
+    remove_duplicates_without_buffer,
+    is_in
+)
 
 class TestCreateLinkedList(unittest.TestCase):
     def setUp(self):
@@ -39,3 +45,16 @@ class TestCleaningFunctions(unittest.TestCase):
         self.assertEqual(result.value(), 'a')
         self.assertEqual(result.next().value(), 'b')
         self.assertEqual(result.next().next().value(), None)
+
+    def test_remove_duplicates_without_buffer(self):
+        ll = create_ll("abb")
+        result = remove_duplicates_without_buffer(ll)
+        self.assertEqual(result.value(), 'a')
+        self.assertEqual(result.next().value(), 'b')
+        self.assertEqual(result.next().next().value(), None)
+
+class TestMembershipFunctions(unittest.TestCase):
+    def test_is_in(self):
+        ll = create_ll("abc")
+        self.assertTrue(is_in('a', ll))
+        self.assertFalse(is_in('d', ll))
