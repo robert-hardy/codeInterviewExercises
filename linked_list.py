@@ -43,3 +43,11 @@ def is_in(val, ll):
             return True
         head = head.next()
     return False
+
+def to_string(ll):
+    vals = ""
+    head = ll
+    while head.value() is not None:
+        vals = vals + head.value()
+        head = head.next()
+    return vals

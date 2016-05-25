@@ -6,7 +6,8 @@ from linked_list import (
     remove_duplicates,
     remove_duplicates_without_buffer,
     trim_duplicates_from_front,
-    is_in
+    is_in,
+    to_string
 )
 
 class TestCreateLinkedList(unittest.TestCase):
@@ -66,3 +67,8 @@ class TestMembershipFunctions(unittest.TestCase):
         ll = create_ll("abc")
         self.assertTrue(is_in('a', ll))
         self.assertFalse(is_in('d', ll))
+
+class TestHelpers(unittest.TestCase):
+    def test_to_string(self):
+        ll = create_ll("abc")
+        self.assertEqual(to_string(ll), "abc")
