@@ -7,6 +7,8 @@ class li(object):
         return self.val
 
     def next(self):
+        if self.ni is None:
+            return self
         return self.ni
 
 def create_ll(lst):

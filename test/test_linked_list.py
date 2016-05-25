@@ -30,3 +30,4 @@ class TestTermination(unittest.TestCase):
         self.assertEqual(ll.next().value(), 'b')
         self.assertEqual(ll.next().next().value(), None)
         self.assertEqual(ll.next().next().next().value(), None)
+        self.assertEqual(ll.next().next().next().next().value(), None)
