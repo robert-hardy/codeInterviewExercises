@@ -17,3 +17,6 @@ def create_ll(lst):
         new_head = li(x, tail)
         tail = new_head
     return new_head
+
+def remove_duplicates(ll):
+    return ll

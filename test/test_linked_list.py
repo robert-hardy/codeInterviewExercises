@@ -1,6 +1,6 @@
 import unittest
 
-from linked_list import create_ll, li
+from linked_list import create_ll, li, remove_duplicates
 
 class TestCreateLinkedList(unittest.TestCase):
     def setUp(self):
@@ -31,3 +31,11 @@ class TestTermination(unittest.TestCase):
         self.assertEqual(ll.next().next().value(), None)
         self.assertEqual(ll.next().next().next().value(), None)
         self.assertEqual(ll.next().next().next().next().value(), None)
+
+class TestCleaningFunctions(unittest.TestCase):
+    def test_remove_duplicates(self):
+        ll = create_ll("abb")
+        result = remove_duplicates(ll)
+        self.assertEqual(ll.value(), 'a')
+        self.assertEqual(ll.next().value(), 'b')
+        self.assertEqual(ll.next().next().value(), None)
