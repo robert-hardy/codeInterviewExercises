@@ -5,6 +5,7 @@ from linked_list import (
     li,
     remove_duplicates,
     remove_duplicates_without_buffer,
+    trim_duplicates_from_front,
     is_in
 )
 
@@ -49,6 +50,13 @@ class TestCleaningFunctions(unittest.TestCase):
     def test_remove_duplicates_without_buffer(self):
         ll = create_ll("abb")
         result = remove_duplicates_without_buffer(ll)
+        self.assertEqual(result.value(), 'a')
+        self.assertEqual(result.next().value(), 'b')
+        self.assertEqual(result.next().next().value(), None)
+
+    def test_trim_duplicates_from_front(self):
+        ll = create_ll("abb")
+        result = trim_duplicates_from_front(ll)
         self.assertEqual(result.value(), 'a')
         self.assertEqual(result.next().value(), 'b')
         self.assertEqual(result.next().next().value(), None)
