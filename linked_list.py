@@ -11,6 +11,9 @@ class li(object):
             return self
         return self.ni
 
+    def set_next(self, ni):
+        self.ni = ni
+
 def create_ll(lst):
     tail = li(None, None)
     for x in lst[::-1]:
@@ -28,7 +31,14 @@ def remove_duplicates(ll):
     return create_ll(vals)
 
 def remove_duplicates_without_buffer(ll):
-    return trim_duplicates_from_front(ll)
+    ok_head = trim_duplicates_from_front(ll)
+    head = ok_head
+    while head.value() is not None:
+        if is_in(head.value(), head.next()):
+            head.set_next(head.next().next())
+        head = head.next()
+    return ok_head
+
 
 def trim_duplicates_from_front(ll):
     head = ll
