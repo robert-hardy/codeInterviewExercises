@@ -47,6 +47,7 @@ class TestCleaningFunctions(unittest.TestCase):
         self.assertEqual(to_string(result), "ab")
 
     def test_remove_duplicates_without_buffer(self):
+        # Uniqueness is checked from the right.
         ll = create_ll("ababcc")
         result = remove_duplicates_without_buffer(ll)
         self.assertEqual(to_string(result), "abc")

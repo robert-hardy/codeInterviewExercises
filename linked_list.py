@@ -31,14 +31,14 @@ def remove_duplicates(ll):
     return create_ll(vals)
 
 def remove_duplicates_without_buffer(ll):
-    ok_head = trim_duplicates_from_front(ll)
-    head = ok_head
-    while head.value() is not None:
-        if is_in(head.value(), head.next()):
-            head.set_next(head.next().next())
-        head = head.next()
-    return ok_head
-
+    head = trim_duplicates_from_front(ll)
+    if head.value() is None:
+        return head
+    last_element_of_head = head
+    while last_element_of_head.next().value() is not None:
+        last_element_of_head.set_next(trim_duplicates_from_front(last_element_of_head.next()))
+        last_element_of_head = last_element_of_head.next()
+    return head
 
 def trim_duplicates_from_front(ll):
     head = ll
