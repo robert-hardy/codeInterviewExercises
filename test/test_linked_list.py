@@ -44,23 +44,17 @@ class TestCleaningFunctions(unittest.TestCase):
     def test_remove_duplicates(self):
         ll = create_ll("abb")
         result = remove_duplicates(ll)
-        self.assertEqual(result.value(), 'a')
-        self.assertEqual(result.next().value(), 'b')
-        self.assertEqual(result.next().next().value(), None)
+        self.assertEqual(to_string(result), "ab")
 
     def test_remove_duplicates_without_buffer(self):
         ll = create_ll("abb")
         result = remove_duplicates_without_buffer(ll)
-        self.assertEqual(result.value(), 'a')
-        self.assertEqual(result.next().value(), 'b')
-        self.assertEqual(result.next().next().value(), None)
+        self.assertEqual(to_string(result), "ab")
 
     def test_trim_duplicates_from_front(self):
         ll = create_ll("aab")
         result = trim_duplicates_from_front(ll)
-        self.assertEqual(result.value(), 'a')
-        self.assertEqual(result.next().value(), 'b')
-        self.assertEqual(result.next().next().value(), None)
+        self.assertEqual(to_string(result), "ab")
 
 class TestMembershipFunctions(unittest.TestCase):
     def test_is_in(self):
