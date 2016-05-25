@@ -36,6 +36,6 @@ class TestCleaningFunctions(unittest.TestCase):
     def test_remove_duplicates(self):
         ll = create_ll("abb")
         result = remove_duplicates(ll)
-        self.assertEqual(ll.value(), 'a')
-        self.assertEqual(ll.next().value(), 'b')
-        self.assertEqual(ll.next().next().value(), None)
+        self.assertEqual(result.value(), 'a')
+        self.assertEqual(result.next().value(), 'b')
+        self.assertEqual(result.next().next().value(), None)

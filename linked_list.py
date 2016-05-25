@@ -22,6 +22,7 @@ def remove_duplicates(ll):
     vals = ""
     head = ll
     while head.value() is not None:
-        vals = vals + ll.value()
+        if head.value() not in vals:
+            vals = vals + head.value()
         head = head.next()
     return create_ll(vals)
