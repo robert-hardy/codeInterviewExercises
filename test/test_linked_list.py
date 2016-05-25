@@ -55,7 +55,7 @@ class TestCleaningFunctions(unittest.TestCase):
         self.assertEqual(result.next().next().value(), None)
 
     def test_trim_duplicates_from_front(self):
-        ll = create_ll("abb")
+        ll = create_ll("aab")
         result = trim_duplicates_from_front(ll)
         self.assertEqual(result.value(), 'a')
         self.assertEqual(result.next().value(), 'b')
