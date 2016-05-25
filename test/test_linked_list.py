@@ -50,6 +50,9 @@ class TestCleaningFunctions(unittest.TestCase):
         ll = create_ll("ababcc")
         result = remove_duplicates_without_buffer(ll)
         self.assertEqual(to_string(result), "abc")
+        ll = create_ll("ababccaac")
+        result = remove_duplicates_without_buffer(ll)
+        self.assertEqual(to_string(result), "bac")
 
     def test_trim_duplicates_from_front(self):
         ll = create_ll("aab")
