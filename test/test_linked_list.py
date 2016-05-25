@@ -1,17 +1,16 @@
 import unittest
 
-from linked_list import ll, li
+from linked_list import create_ll, li
 
-class TestLL(unittest.TestCase):
+class TestCreateLinkedList(unittest.TestCase):
     def setUp(self):
-        self.result = ll("abcdef")
+        self.result = create_ll("abcdef")
 
     def test_get_head(self):
         self.assertEquals(self.result.value(), 'f')
 
     def test_get_next(self):
-        import ipdb; ipdb.set_trace()
-        self.assertEquals(self.result.next().value())
+        self.assertEquals(self.result.next().value(), 'e')
 
 class TestLI(unittest.TestCase):
     def test_get_value(self):
