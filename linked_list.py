@@ -28,7 +28,7 @@ def remove_duplicates(ll):
     return create_ll(vals)
 
 def remove_duplicates_without_buffer(ll):
-    return ll
+    return trim_duplicates_from_front(ll)
 
 def trim_duplicates_from_front(ll):
     head = ll
