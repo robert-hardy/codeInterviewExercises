@@ -1,3 +1,6 @@
 class ll(object):
     def __init__(self, lst):
-        pass
+        self.head = lst[0]
+
+    def value(self):
+        return self.head
