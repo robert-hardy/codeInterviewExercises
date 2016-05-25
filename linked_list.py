@@ -19,4 +19,9 @@ def create_ll(lst):
     return new_head
 
 def remove_duplicates(ll):
-    return ll
+    vals = ""
+    head = ll
+    while head.value() is not None:
+        vals = vals + ll.value()
+        head = head.next()
+    return create_ll(vals)
