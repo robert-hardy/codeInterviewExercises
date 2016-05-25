@@ -7,10 +7,10 @@ class TestCreateLinkedList(unittest.TestCase):
         self.result = create_ll("abcdef")
 
     def test_get_head(self):
-        self.assertEquals(self.result.value(), 'f')
+        self.assertEquals(self.result.value(), 'a')
 
     def test_get_next(self):
-        self.assertEquals(self.result.next().value(), 'e')
+        self.assertEquals(self.result.next().value(), 'b')
 
 class TestLI(unittest.TestCase):
     def test_get_value(self):
@@ -22,3 +22,11 @@ class TestLI(unittest.TestCase):
         bar = li('b', foo)
         self.assertEqual(bar.value(), 'b')
         self.assertEqual(bar.next().value(), 'a')
+
+class TestTermination(unittest.TestCase):
+    def test_tail_of_end(self):
+        ll = create_ll("ab")
+        self.assertEqual(ll.value(), 'a')
+        self.assertEqual(ll.next().value(), 'b')
+        self.assertEqual(ll.next().next().value(), None)
+        self.assertEqual(ll.next().next().next().value(), None)

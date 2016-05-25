@@ -11,7 +11,7 @@ class li(object):
 
 def create_ll(lst):
     tail = li(None, None)
-    for x in lst:
+    for x in lst[::-1]:
         new_head = li(x, tail)
         tail = new_head
     return new_head
