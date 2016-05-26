@@ -1,2 +1,2 @@
-def all_slices(iterable):
-    return [ [ iterable[:i], iterable[i:] ] for i in iter(iterable[1:]) ]
+def all_slices(lst):
+    return [ ( lst[:i], lst[i:] ) for i in iter(lst[1:]) ]
