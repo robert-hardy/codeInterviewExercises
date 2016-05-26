@@ -1,4 +1,4 @@
 import itertools
 
 def all_permutations(lst):
-    return list(itertools.permutations(lst,2))
+    return list(itertools.permutations(enumerate(lst), 2))
