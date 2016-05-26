@@ -15,3 +15,10 @@ class TestFoo(unittest.TestCase):
         self.assertEqual(seq.next(), '001')
         self.assertEqual(seq.next(), '010')
         self.assertEqual(seq.next(), '011')
+
+    def test_generator_digits(self):
+        seq = gen(3)
+        self.assertEqual(seq.next(), '000')
+        seq = gen(5)
+        self.assertEqual(seq.next(), '00000')
+        self.assertEqual(seq.next(), '00001')
