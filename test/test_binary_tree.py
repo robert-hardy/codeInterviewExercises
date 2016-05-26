@@ -12,5 +12,11 @@ class TestFoo(unittest.TestCase):
 
     def test_add_to_empty_node(self):
         root = []
-        result = add(root, 'a')
-        self.assertEqual(result, ['a', [], []])
+        add(root, 'a')
+        self.assertEqual(root, ['a', [], []])
+
+    def test_add_two_values(self):
+        root = []
+        add(root, 'a')
+        add(root, 'b')
+        self.assertEqual(root, ['a', ['b', [], []], []])
