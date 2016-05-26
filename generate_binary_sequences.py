@@ -1,5 +1,5 @@
 def gen():
-    number = 0
+    number = 2
     while True:
-        yield bin(number)[2:]
-        number =+ number
+        yield bin(number)[3:]
+        number = number + 1
