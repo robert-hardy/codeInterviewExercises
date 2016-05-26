@@ -20,3 +20,18 @@ class TestFoo(unittest.TestCase):
         add(root, 'a')
         add(root, 'b')
         self.assertEqual(root, ['a', ['b', [], []], []])
+
+    def test_add_three_values(self):
+        root = []
+        add(root, 'a')
+        add(root, 'b')
+        add(root, 'c')
+        self.assertEqual(root, ['a', ['b', [], []], ['c', [], []]])
+
+    def test_add_four_values(self):
+        root = []
+        add(root, 'a')
+        add(root, 'b')
+        add(root, 'c')
+        add(root, 'd')
+        self.assertEqual(root, ['a', ['b', [], []], ['c', [], []]])
