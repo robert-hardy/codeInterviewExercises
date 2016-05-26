@@ -1,5 +1,13 @@
 def add(node, val):
     new_node = [ val, [], []]
-    if not node:
+    if node:
+        left, right = node[1:]
+        if not left:
+            left.extend(new_node)
+        elif not right:
+            right.extend(new_node)
+        else:
+            add(left, val)
+    else:
         node.extend(new_node)
     return node
