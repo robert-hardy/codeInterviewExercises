@@ -7,10 +7,12 @@ import sys
 @contextlib.contextmanager
 def redirect_stdout():
     s = StringIO()
-    sys.stdout = s
-    yield s
-    sys.stdout = sys.__stdout__
-    s = s.close()
+    try:
+        sys.stdout = s
+        yield s
+    finally:
+        sys.stdout = sys.__stdout__
+        s = s.close()
 
 
 from binary_tree import (
