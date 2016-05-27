@@ -32,6 +32,6 @@ class TestFoo(unittest.TestCase):
         self.assertEqual(result, None)
 
     def test_one_sweep(self):
-        lst = list(range(1, 10))
+        lst = range(1, 10)
         result = one_sweep(lst, 4)
         self.assertEqual(result, ((0, 1), (2, 3)))
