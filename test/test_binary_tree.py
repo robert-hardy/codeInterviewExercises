@@ -28,11 +28,10 @@ class TestFoo(unittest.TestCase):
         add(root, 'c')
         self.assertEqual(root, ['a', ['b', [], []], ['c', [], []]])
 
-    @unittest.skip("Skip for the moment.")
     def test_add_four_values(self):
         root = []
         add(root, 'a')
         add(root, 'b')
         add(root, 'c')
         add(root, 'd')
-        self.assertEqual(root, ['a', ['b', [], []], ['c', [], []]])
+        self.assertEqual(root, ['a', ['b', ['d', [], []], []], ['c', [], []]])
