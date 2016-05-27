@@ -1,7 +1,8 @@
 import unittest
 
 from itertools_exercises import (
-    tabulate
+    tabulate,
+    separate_the_a
 )
 
 class TestTabulate(unittest.TestCase):
@@ -18,3 +19,9 @@ class TestTabulate(unittest.TestCase):
         table = tabulate(f)
         result = [ table.next() for i in range(3) ]
         self.assertEqual(result, [ 0, 1, 4])
+
+class TestGroupBy(unittest.TestCase):
+    def test_group_by(self):
+        lst = "abcasaf"
+        result = separate_the_a(lst)
+        self.assertEqual(result, ["aaa", "bcsf"])
