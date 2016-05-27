@@ -18,3 +18,10 @@ def traverse_print(t, order):
     print t[0]
     traverse_print(t[1], order)
     traverse_print(t[2], order)
+
+def traverse_yield(t, order):
+    if not t:
+        return
+    yield t[0]
+    traverse_yield(t[1], order)
+    traverse_yield(t[2], order)

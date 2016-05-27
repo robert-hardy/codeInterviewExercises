@@ -4,6 +4,12 @@ import contextlib
 from StringIO import StringIO
 import sys
 
+from binary_tree import (
+    add,
+    traverse_print,
+    traverse_yield
+)
+
 @contextlib.contextmanager
 def redirect_stdout():
     s = StringIO()
@@ -13,12 +19,6 @@ def redirect_stdout():
     finally:
         sys.stdout = sys.__stdout__
         s = s.close()
-
-
-from binary_tree import (
-    add,
-    traverse_print
-)
 
 class TestFoo(unittest.TestCase):
     def test_simple_tree(self):
@@ -62,7 +62,7 @@ class TestTraversing(unittest.TestCase):
             result = s.getvalue().split('\n')[:-1]
         self.assertEqual(result, [])
 
-    def test_traverse(self):
+    def test_traverse_print(self):
         tree = []
         add(tree, 'a')
         add(tree, 'b')
@@ -70,4 +70,12 @@ class TestTraversing(unittest.TestCase):
         with redirect_stdout() as s:
             traverse_print(tree, 'pre')
             result = s.getvalue().split('\n')[:-1]
+        self.assertEqual(result, ['a', 'b', 'c'])
+
+    def test_traverse_yield(self):
+        tree = []
+        add(tree, 'a')
+        add(tree, 'b')
+        add(tree, 'c')
+        result = list(traverse_yield(tree, 'pre'))
         self.assertEqual(result, ['a', 'b', 'c'])
