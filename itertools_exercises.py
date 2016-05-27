@@ -28,4 +28,7 @@ def list_tails(s):
     i.next()
     i, t = tee(i)
     result.append(''.join(list(t)))
+    i.next()
+    i, t = tee(i)
+    result.append(''.join(list(t)))
     return result
