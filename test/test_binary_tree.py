@@ -5,10 +5,12 @@ from StringIO import StringIO
 import sys
 
 @contextlib.contextmanager
-def redirect_stdout(s):
+def redirect_stdout():
+    s = StringIO()
     sys.stdout = s
     yield s
     sys.stdout = sys.__stdout__
+    s = s.close()
 
 
 from binary_tree import (
@@ -53,8 +55,7 @@ class TestFoo(unittest.TestCase):
 class TestTraversing(unittest.TestCase):
     def test_empty_tree(self):
         tree = []
-        s = StringIO()
-        with redirect_stdout(s):
+        with redirect_stdout() as s:
             traverse(tree, 'pre')
             result = s.getvalue().split('\n')[:-1]
         self.assertEqual(result, [])
@@ -64,8 +65,7 @@ class TestTraversing(unittest.TestCase):
         add(tree, 'a')
         add(tree, 'b')
         add(tree, 'c')
-        s = StringIO()
-        with redirect_stdout(s):
+        with redirect_stdout() as s:
             traverse(tree, 'pre')
             result = s.getvalue().split('\n')[:-1]
         self.assertEqual(result, ['a', 'b', 'c'])
