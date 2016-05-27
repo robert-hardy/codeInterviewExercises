@@ -2,7 +2,8 @@ import unittest
 
 from two_sum import (
     all_permutations,
-    get_first_sum_to_target
+    get_first_sum_to_target,
+    one_sweep
 )
 
 class TestFoo(unittest.TestCase):
@@ -29,3 +30,8 @@ class TestFoo(unittest.TestCase):
 
         result = get_first_sum_to_target(combos, 7)
         self.assertEqual(result, None)
+
+    def test_one_sweep(self):
+        lst = list(range(1, 10))
+        result = one_sweep(lst, 4)
+        self.assertEqual(result, ((0, 1), (2, 3)))
