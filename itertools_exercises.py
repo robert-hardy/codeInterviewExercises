@@ -1,7 +1,8 @@
 from itertools import (
     count,
     imap,
-    groupby
+    groupby,
+    tee
 )
 
 def tabulate(func):
@@ -18,3 +19,10 @@ def separate_the_a(s):
         else:
             the_other_list.extend(list(g))
     return [ ''.join(the_a_list), ''.join(the_other_list) ]
+
+def list_tails(s):
+    result = []
+    for i in s:
+        t = tee(i)[1]
+        result.extend(list(t))
+    return result

@@ -2,7 +2,8 @@ import unittest
 
 from itertools_exercises import (
     tabulate,
-    separate_the_a
+    separate_the_a,
+    list_tails
 )
 
 class TestTabulate(unittest.TestCase):
@@ -25,3 +26,9 @@ class TestGroupBy(unittest.TestCase):
         lst = "abcasaf"
         result = separate_the_a(lst)
         self.assertEqual(result, ["aaa", "bcsf"])
+
+class TestTee(unittest.TestCase):
+    def test_tails_of_list(self):
+        import ipdb; ipdb.set_trace()
+        result = list_tails("abc")
+        self.assertEquals(result, ["abc", "bc", "c"])
