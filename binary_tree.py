@@ -13,7 +13,8 @@ def add(node, val):
     return node
 
 def traverse(t, order):
-    result = []
     if not t:
-        return t
-    return t
+        return
+    print t[0]
+    traverse(t[1], order)
+    traverse(t[2], order)
