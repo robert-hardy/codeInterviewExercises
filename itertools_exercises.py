@@ -1,4 +1,7 @@
-import itertools
+from itertools import (
+    count,
+    imap
+)
 
 def tabulate(func):
-    return itertools.imap(func, itertools.count())
+    return imap(func, count())
