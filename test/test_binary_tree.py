@@ -1,6 +1,9 @@
 import unittest
 
-from binary_tree import add
+from binary_tree import (
+    add,
+    traverse
+)
 
 class TestFoo(unittest.TestCase):
     def test_simple_tree(self):
@@ -35,3 +38,17 @@ class TestFoo(unittest.TestCase):
         add(root, 'c')
         add(root, 'd')
         self.assertEqual(root, ['a', ['b', ['d', [], []], []], ['c', [], []]])
+
+class TestTraversing(unittest.TestCase):
+    def test_empty_tree(self):
+        tree = []
+        result = traverse(tree, 'pre')
+        self.assertEqual(result, [])
+
+    def test_traverse(self):
+        tree = []
+        add(tree, 'a')
+        add(tree, 'b')
+        add(tree, 'c')
+        result = traverse(tree, 'pre')
+        self.assertEqual(result, ['a', 'b', 'c'])

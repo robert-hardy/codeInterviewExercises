@@ -11,3 +11,9 @@ def add(node, val):
     else:
         node.extend(new_node)
     return node
+
+def traverse(t, order):
+    result = []
+    if not t:
+        return t
+    return t
