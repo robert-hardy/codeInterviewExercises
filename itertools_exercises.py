@@ -22,7 +22,10 @@ def separate_the_a(s):
 
 def list_tails(s):
     result = []
-    for i in s:
-        t = tee(i)[1]
-        result.extend(list(t))
+    i = iter(s)
+    i, t = tee(i)
+    result.append(''.join(list(t)))
+    i.next()
+    i, t = tee(i)
+    result.append(''.join(list(t)))
     return result

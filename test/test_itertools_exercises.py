@@ -29,6 +29,5 @@ class TestGroupBy(unittest.TestCase):
 
 class TestTee(unittest.TestCase):
     def test_tails_of_list(self):
-        import ipdb; ipdb.set_trace()
         result = list_tails("abc")
         self.assertEquals(result, ["abc", "bc", "c"])
