@@ -12,9 +12,9 @@ def add(node, val):
         node.extend(new_node)
     return node
 
-def traverse(t, order):
+def traverse_print(t, order):
     if not t:
         return
     print t[0]
-    traverse(t[1], order)
-    traverse(t[2], order)
+    traverse_print(t[1], order)
+    traverse_print(t[2], order)

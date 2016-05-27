@@ -17,7 +17,7 @@ def redirect_stdout():
 
 from binary_tree import (
     add,
-    traverse
+    traverse_print
 )
 
 class TestFoo(unittest.TestCase):
@@ -58,7 +58,7 @@ class TestTraversing(unittest.TestCase):
     def test_empty_tree(self):
         tree = []
         with redirect_stdout() as s:
-            traverse(tree, 'pre')
+            traverse_print(tree, 'pre')
             result = s.getvalue().split('\n')[:-1]
         self.assertEqual(result, [])
 
@@ -68,6 +68,6 @@ class TestTraversing(unittest.TestCase):
         add(tree, 'b')
         add(tree, 'c')
         with redirect_stdout() as s:
-            traverse(tree, 'pre')
+            traverse_print(tree, 'pre')
             result = s.getvalue().split('\n')[:-1]
         self.assertEqual(result, ['a', 'b', 'c'])
