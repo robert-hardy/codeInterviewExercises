@@ -23,12 +23,10 @@ def separate_the_a(s):
 def list_tails(s):
     result = []
     i = iter(s)
-    i, t = tee(i)
-    result.append(''.join(list(t)))
-    i.next()
-    i, t = tee(i)
-    result.append(''.join(list(t)))
-    i.next()
-    i, t = tee(i)
-    result.append(''.join(list(t)))
-    return result
+    try:
+        while True:
+            i, t = tee(i)
+            result.append(''.join(list(t)))
+            i.next()
+    except StopIteration:
+        return result[:-1]
