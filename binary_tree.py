@@ -23,5 +23,7 @@ def traverse_yield(t, order):
     if not t:
         return
     yield t[0]
-    traverse_yield(t[1], order)
-    traverse_yield(t[2], order)
+    for l  in traverse_yield(t[1], order):
+        yield l
+    for r in traverse_yield(t[2], order):
+        yield r
