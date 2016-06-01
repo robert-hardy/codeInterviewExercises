@@ -27,3 +27,14 @@ def traverse_yield(t, order):
         yield l
     for r in traverse_yield(t[2], order):
         yield r
+
+def traverse_global_var(t):
+    def helper(t):
+        if not t:
+            return
+        result.append(t[0])
+        helper(t[1])
+        helper(t[2])
+    result = []
+    helper(t)
+    return result

@@ -7,7 +7,8 @@ import sys
 from binary_tree import (
     add,
     traverse_print,
-    traverse_yield
+    traverse_yield,
+    traverse_global_var
 )
 
 @contextlib.contextmanager
@@ -78,4 +79,13 @@ class TestTraversing(unittest.TestCase):
         add(tree, 'b')
         add(tree, 'c')
         result = list(traverse_yield(tree, 'pre'))
+        self.assertEqual(result, ['a', 'b', 'c'])
+
+class TestTraverseGlobalVar(unittest.TestCase):
+    def test_traverse_global_var(self):
+        tree = []
+        add(tree, 'a')
+        add(tree, 'b')
+        add(tree, 'c')
+        result = list(traverse_global_var(tree))
         self.assertEqual(result, ['a', 'b', 'c'])
