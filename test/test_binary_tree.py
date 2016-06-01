@@ -8,7 +8,7 @@ from binary_tree import (
     add,
     traverse_print,
     traverse_yield,
-    traverse_global_var
+    traverse_via_helper
 )
 
 @contextlib.contextmanager
@@ -87,5 +87,5 @@ class TestTraverseGlobalVar(unittest.TestCase):
         add(tree, 'a')
         add(tree, 'b')
         add(tree, 'c')
-        result = list(traverse_global_var(tree))
+        result = list(traverse_via_helper(tree))
         self.assertEqual(result, ['a', 'b', 'c'])

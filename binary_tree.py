@@ -28,7 +28,7 @@ def traverse_yield(t):
     for r in traverse_yield(t[2]):
         yield r
 
-def traverse_global_var(t):
+def traverse_via_helper(t):
     def helper(t):
         if not t:
             return
