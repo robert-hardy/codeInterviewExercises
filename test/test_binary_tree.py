@@ -78,7 +78,7 @@ class TestTraversing(unittest.TestCase):
         add(tree, 'a')
         add(tree, 'b')
         add(tree, 'c')
-        result = list(traverse_yield(tree, 'pre'))
+        result = list(traverse_yield(tree))
         self.assertEqual(result, ['a', 'b', 'c'])
 
 class TestTraverseGlobalVar(unittest.TestCase):

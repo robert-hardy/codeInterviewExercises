@@ -19,13 +19,13 @@ def traverse_print(t, order):
     traverse_print(t[1], order)
     traverse_print(t[2], order)
 
-def traverse_yield(t, order):
+def traverse_yield(t):
     if not t:
         return
     yield t[0]
-    for l  in traverse_yield(t[1], order):
+    for l  in traverse_yield(t[1]):
         yield l
-    for r in traverse_yield(t[2], order):
+    for r in traverse_yield(t[2]):
         yield r
 
 def traverse_global_var(t):
