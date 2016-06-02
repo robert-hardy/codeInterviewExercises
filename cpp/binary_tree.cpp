@@ -24,3 +24,21 @@ void parse_print(Node *n) {
         parse_print(n->right);
     }
 }
+
+std::string result;
+
+void parse_helper(Node *n) {
+    result.push_back(n->value);
+    if (n->left) {
+        parse_helper(n->left);
+    }
+    if (n->right) {
+        parse_helper(n->right);
+    }
+}
+
+std::string parse(Node *n) {
+    result = "";
+    parse_helper(n);
+    return result;
+}

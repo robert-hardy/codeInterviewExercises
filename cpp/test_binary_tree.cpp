@@ -25,3 +25,12 @@ TEST(TestNodeClass, ParsePrintOkayForEmptyTree) {
     std::string output = testing::internal::GetCapturedStdout();
     ASSERT_EQ(output, "0");
 }
+
+TEST(TestNodeClass, ParseWithVar) {
+    Node *root = new Node(1);
+    add(root, 2);
+    add(root, 3);
+    add(root, 4);
+    std::string output = parse(root);
+    ASSERT_EQ(output, "1243");
+}

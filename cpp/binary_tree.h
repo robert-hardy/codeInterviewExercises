@@ -20,4 +20,6 @@ void add(Node *r, int val);
 
 void parse_print(Node *r);
 
+std::string parse(Node *r);
+
 #endif /* BINARYTREE_H */
