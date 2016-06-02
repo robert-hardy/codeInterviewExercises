@@ -25,20 +25,19 @@ void parse_print(Node *n) {
     }
 }
 
-std::string result;
 
-void parse_helper(Node *n) {
+void parse_helper(Node *n, std::string &result) {
     result = result + boost::lexical_cast<std::string>(n->value);
     if (n->left) {
-        parse_helper(n->left);
+        parse_helper(n->left, result);
     }
     if (n->right) {
-        parse_helper(n->right);
+        parse_helper(n->right, result);
     }
 }
 
 std::string parse(Node *n) {
-    result = "";
-    parse_helper(n);
+    std::string result = "";
+    parse_helper(n, result);
     return result;
 }
