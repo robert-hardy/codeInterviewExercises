@@ -1,8 +1,9 @@
 #include "binary_tree.h"
 #include "gtest/gtest.h"
 
-TEST(TestNode, CanCreateNode) {
+TEST(TestNode, CreateSmallTree) {
     node *root = new node;
-    root->value = 10;
-    ASSERT_EQ(root->value, 10);
+    add(root, 1);
+    add(root, 2);
+    ASSERT_EQ(root->left->value, 3);
 }
