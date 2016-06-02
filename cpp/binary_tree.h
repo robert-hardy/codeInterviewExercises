@@ -8,6 +8,8 @@ struct Node {
 
     Node(int val) {
         this->value = val;
+        this->left = 0;
+        this->right = 0;
     }
 };
 
