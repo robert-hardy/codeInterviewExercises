@@ -11,4 +11,10 @@ void add(Node *n, int val) {
 
 void parse_print(Node *n) {
     std::cout << n->value;
+    if (n->left) {
+        parse_print(n->left);
+    }
+    if (n->right) {
+        parse_print(n->right);
+    }
 }
