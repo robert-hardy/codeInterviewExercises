@@ -8,3 +8,7 @@ void add(Node *n, int val) {
         n->left = new_node;
     }
 }
+
+void parse_print(Node *n) {
+    std::cout << n->value;
+}
