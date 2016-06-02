@@ -9,3 +9,8 @@ TEST(TestNode, CreateSmallTree) {
     add(root, 2);
     ASSERT_EQ(root->left->value, 2);
 }
+
+TEST(TestNodeClass, CreateSmallTree) {
+    Node *root = new Node(1);
+    ASSERT_EQ(root->value, 1);
+}
