@@ -2,5 +2,7 @@
 #include "gtest/gtest.h"
 
 TEST(TestNode, CanCreateNode) {
-    ASSERT_EQ(6, 6);
+    node *root = new node;
+    root->value = 10;
+    ASSERT_EQ(root->value, 10);
 }
