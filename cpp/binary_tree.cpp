@@ -28,7 +28,7 @@ void parse_print(Node *n) {
 std::string result;
 
 void parse_helper(Node *n) {
-    result.push_back(n->value);
+    result = result + boost::lexical_cast<std::string>(n->value);
     if (n->left) {
         parse_helper(n->left);
     }
