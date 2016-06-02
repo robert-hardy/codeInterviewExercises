@@ -10,8 +10,17 @@ TEST(TestNodeClass, CreateSmallTree) {
 TEST(TestNodeClass, ParseAndPrint) {
     Node *root = new Node(1);
     add(root, 2);
+    add(root, 3);
     testing::internal::CaptureStdout();
     parse_print(root);
     std::string output = testing::internal::GetCapturedStdout();
-    ASSERT_EQ(output, "12");
+    ASSERT_EQ(output, "123");
+}
+
+TEST(TestNodeClass, ParsePrintOkayForEmptyTree) {
+    Node *root = new Node(0);
+    testing::internal::CaptureStdout();
+    parse_print(root);
+    std::string output = testing::internal::GetCapturedStdout();
+    ASSERT_EQ(output, "0");
 }

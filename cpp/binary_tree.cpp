@@ -1,11 +1,16 @@
 #include "binary_tree.h"
 
 void add(Node *n, int val) {
+    Node *new_node = new Node(val);
+    new_node->left = 0;
+    new_node->right = 0;
     if (!n->left) {
-        Node *new_node = new Node(val);
-        new_node->left = 0;
-        new_node->right = 0;
         n->left = new_node;
+        return;
+    }
+    if (!n->right) {
+        n->right = new_node;
+        return;
     }
 }
 
