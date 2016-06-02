@@ -12,6 +12,7 @@ void add(Node *n, int val) {
         n->right = new_node;
         return;
     }
+    add(n->left, val);
 }
 
 void parse_print(Node *n) {

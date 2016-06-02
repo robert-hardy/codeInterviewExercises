@@ -11,10 +11,11 @@ TEST(TestNodeClass, ParseAndPrint) {
     Node *root = new Node(1);
     add(root, 2);
     add(root, 3);
+    add(root, 4);
     testing::internal::CaptureStdout();
     parse_print(root);
     std::string output = testing::internal::GetCapturedStdout();
-    ASSERT_EQ(output, "123");
+    ASSERT_EQ(output, "1243");
 }
 
 TEST(TestNodeClass, ParsePrintOkayForEmptyTree) {
