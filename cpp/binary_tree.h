@@ -7,4 +7,6 @@ struct node {
     node *right;
 };
 
+void add(node *r, int val);
+
 #endif /* BINARYTREE_H */

@@ -3,7 +3,7 @@
 
 TEST(TestNode, CreateSmallTree) {
     node *root = new node;
-    add(root, 1);
+    root->value = 1;
     add(root, 2);
     ASSERT_EQ(root->left->value, 3);
 }
