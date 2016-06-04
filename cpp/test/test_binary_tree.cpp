@@ -1,4 +1,4 @@
-#include "binary_tree.h"
+#include "../binary_tree.h"
 #include "gtest/gtest.h"
 
 TEST(TestNodeClass, CreateSmallTree) {

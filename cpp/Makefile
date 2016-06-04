@@ -19,6 +19,9 @@ GTEST_DIR = /home/robert/googletest/googletest
 # Where to find user code.
 USER_DIR = .
 
+# Where to find tests.
+TEST_DIR = test
+
 # Flags passed to the preprocessor.
 # Set Google Test's header directory as a system directory, such that
 # the compiler doesn't generate warnings in Google Test headers.
@@ -74,9 +77,9 @@ gtest_main.a : gtest-all.o gtest_main.o
 binary_tree.o : $(USER_DIR)/binary_tree.cpp $(USER_DIR)/binary_tree.h $(GTEST_HEADERS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/binary_tree.cpp
 
-test_binary_tree.o : $(USER_DIR)/test_binary_tree.cpp \
+test_binary_tree.o : $(TEST_DIR)/test_binary_tree.cpp \
                      $(USER_DIR)/binary_tree.h $(GTEST_HEADERS)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/test_binary_tree.cpp
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(TEST_DIR)/test_binary_tree.cpp
 
 test_binary_tree : binary_tree.o test_binary_tree.o gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
