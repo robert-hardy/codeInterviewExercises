@@ -8,3 +8,13 @@ TEST(OddOccurrencesInArray, FunctionExists) {
     int result = solution(A);
     ASSERT_EQ(result, 3);
 }
+
+TEST(OddOccurrencesInArray, XOR) {
+    int result;
+    result = 3 ^ 3 ^ 4;
+    ASSERT_EQ(result, 4);
+    result = 4 ^ 3 ^ 3;
+    ASSERT_EQ(result, 4);
+    result = 3 ^ 4 ^ 3;
+    ASSERT_EQ(result, 4);
+}
