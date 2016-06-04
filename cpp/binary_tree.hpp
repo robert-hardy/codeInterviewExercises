@@ -8,11 +8,7 @@ struct Node {
     Node *left;
     Node *right;
 
-    Node(int val) {
-        this->value = val;
-        this->left = 0;
-        this->right = 0;
-    }
+    Node(int);
 };
 
 void add(Node *r, int val);

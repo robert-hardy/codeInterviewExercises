@@ -3,6 +3,13 @@
 #include <boost/lexical_cast.hpp>
 #include <iostream>
 
+Node::Node(int val) {
+    this->value = val;
+    this->left = 0;
+    this->right = 0;
+};
+
+
 void add(Node *n, int val) {
     Node *new_node = new Node(val);
     new_node->left = 0;
