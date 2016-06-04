@@ -26,13 +26,13 @@ TESTS = run_tests
 
 
 # Housekeeping targets
-all : $(TESTS)
+all : run_tests
 
-run: $(TESTS)
+run: run_tests
 	./run_tests
 
 clean :
-	rm -f $(TESTS) $(BUILD_DIR)/gtest.a $(BUILD_DIR)/gtest_main.a $(BUILD_DIR)/*.o
+	rm -f run_tests $(BUILD_DIR)/gtest.a $(BUILD_DIR)/gtest_main.a $(BUILD_DIR)/*.o
 
 # googletest targets
 GTEST_SRCS_ = $(GTEST_DIR)/src/*.cc $(GTEST_DIR)/src/*.h $(GTEST_HEADERS)
@@ -58,9 +58,8 @@ $(BUILD_DIR)/binary_tree.o : $(USER_DIR)/binary_tree.cpp $(USER_DIR)/binary_tree
 $(BUILD_DIR)/odd_occurrences_in_array.o : $(USER_DIR)/odd_occurrences_in_array.cpp $(USER_DIR)/odd_occurrences_in_array.h $(GTEST_HEADERS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/odd_occurrences_in_array.cpp -o $@
 
-$(BUILD_DIR)/run_tests.o : $(TEST_DIR)/run_tests.cpp \
-                     $(USER_DIR)/binary_tree.h $(GTEST_HEADERS)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(TEST_DIR)/run_tests.cpp -o $@
+$(BUILD_DIR)/run_tests.o : $(TEST_DIR)/test_binary_tree.cpp $(USER_DIR)/binary_tree.h $(GTEST_HEADERS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(TEST_DIR)/test_binary_tree.cpp -o $@
 
 run_tests : $(BUILD_DIR)/binary_tree.o $(BUILD_DIR)/odd_occurrences_in_array.o $(BUILD_DIR)/run_tests.o $(BUILD_DIR)/gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
