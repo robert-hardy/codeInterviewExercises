@@ -1,6 +1,6 @@
 Code interview exercises
 =======
-This repository contains solutions for 'Codility' type interview questions.
+This repository contains solutions for 'Codility' type interview exercises.
 
 In each directory there is a `Readme.md` which gives links to the questions
 themselves.
