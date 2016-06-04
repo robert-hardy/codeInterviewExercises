@@ -77,12 +77,12 @@ $(BUILD_DIR)/gtest_main.a : gtest-all.o gtest_main.o
 # gtest_main.a, depending on whether it defines its own main()
 # function.
 
-binary_tree.o : $(USER_DIR)/binary_tree.cpp $(USER_DIR)/binary_tree.h $(GTEST_HEADERS)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/binary_tree.cpp
+$(BUILD_DIR)/binary_tree.o : $(USER_DIR)/binary_tree.cpp $(USER_DIR)/binary_tree.h $(GTEST_HEADERS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/binary_tree.cpp -o $@
 
-run_tests.o : $(TEST_DIR)/run_tests.cpp \
+$(BUILD_DIR)/run_tests.o : $(TEST_DIR)/run_tests.cpp \
                      $(USER_DIR)/binary_tree.h $(GTEST_HEADERS)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(TEST_DIR)/run_tests.cpp
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(TEST_DIR)/run_tests.cpp -o $@
 
-run_tests : binary_tree.o run_tests.o $(BUILD_DIR)/gtest_main.a
+run_tests : $(BUILD_DIR)/binary_tree.o $(BUILD_DIR)/run_tests.o $(BUILD_DIR)/gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
