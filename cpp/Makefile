@@ -29,7 +29,7 @@ TESTS = run_tests
 all : $(TESTS)
 
 clean :
-	rm -f $(TESTS) $(BUILD_DIR)/gtest.a $(BUILD_DIR)/gtest_main.a *.o
+	rm -f $(TESTS) $(BUILD_DIR)/gtest.a $(BUILD_DIR)/gtest_main.a $(BUILD_DIR)/*.o
 
 # googletest targets
 GTEST_SRCS_ = $(GTEST_DIR)/src/*.cc $(GTEST_DIR)/src/*.h $(GTEST_HEADERS)
