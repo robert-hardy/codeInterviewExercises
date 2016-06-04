@@ -1,4 +1,4 @@
 *.o
 *.a
 breakpoints
-test_binary_tree
+test_all

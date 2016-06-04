@@ -32,7 +32,7 @@ CXXFLAGS += -g -Wall -Wextra -pthread
 
 # All tests produced by this Makefile.  Remember to add new tests you
 # created to the list.
-TESTS = test_binary_tree
+TESTS = test_all
 
 # All Google Test headers.  Usually you shouldn't change this
 # definition.
@@ -77,9 +77,9 @@ gtest_main.a : gtest-all.o gtest_main.o
 binary_tree.o : $(USER_DIR)/binary_tree.cpp $(USER_DIR)/binary_tree.h $(GTEST_HEADERS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/binary_tree.cpp
 
-test_binary_tree.o : $(TEST_DIR)/test_binary_tree.cpp \
+test_all.o : $(TEST_DIR)/test_all.cpp \
                      $(USER_DIR)/binary_tree.h $(GTEST_HEADERS)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(TEST_DIR)/test_binary_tree.cpp
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(TEST_DIR)/test_all.cpp
 
-test_binary_tree : binary_tree.o test_binary_tree.o gtest_main.a
+test_all : binary_tree.o test_all.o gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
