@@ -4,6 +4,10 @@
 
 #include "odd_occurrences_in_array.h"
 
+int my_xor(int x, int y) {
+    return x^y;
+}
+
 int solution(std::vector<int> &A) {
-    return 3;
+    return std::accumulate(A.begin(), A.end(), 0, my_xor);
 }
