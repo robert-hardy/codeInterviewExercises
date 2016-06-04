@@ -1,8 +1,6 @@
 #ifndef BINARYTREE_H
 #define BINARYTREE_H
 
-#include <boost/lexical_cast.hpp>
-#include <iostream>
 #include <string>
 
 struct Node {

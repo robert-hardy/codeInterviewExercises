@@ -1,5 +1,8 @@
 #include "binary_tree.h"
 
+#include <boost/lexical_cast.hpp>
+#include <iostream>
+
 void add(Node *n, int val) {
     Node *new_node = new Node(val);
     new_node->left = 0;
