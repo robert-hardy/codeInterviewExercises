@@ -28,6 +28,9 @@ TESTS = run_tests
 # Housekeeping targets
 all : $(TESTS)
 
+run: $(TESTS)
+	./run_tests
+
 clean :
 	rm -f $(TESTS) $(BUILD_DIR)/gtest.a $(BUILD_DIR)/gtest_main.a $(BUILD_DIR)/*.o
 

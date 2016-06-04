@@ -1,13 +1,13 @@
 #include "../binary_tree.h"
 #include "gtest/gtest.h"
 
-TEST(TestNodeClass, CreateSmallTree) {
+TEST(BinaryTree, CreateSmallTree) {
     Node *root = new Node(1);
     add(root, 2);
     ASSERT_EQ(root->left->value, 2);
 }
 
-TEST(TestNodeClass, ParseAndPrint) {
+TEST(BinaryTree, ParseAndPrint) {
     Node *root = new Node(1);
     add(root, 2);
     add(root, 3);
@@ -18,7 +18,7 @@ TEST(TestNodeClass, ParseAndPrint) {
     ASSERT_EQ(output, "1243");
 }
 
-TEST(TestNodeClass, ParsePrintOkayForEmptyTree) {
+TEST(BinaryTree, ParsePrintOkayForEmptyTree) {
     Node *root = new Node(0);
     testing::internal::CaptureStdout();
     parse_print(root);
@@ -26,7 +26,7 @@ TEST(TestNodeClass, ParsePrintOkayForEmptyTree) {
     ASSERT_EQ(output, "0");
 }
 
-TEST(TestNodeClass, ParseWithVar) {
+TEST(BinaryTree, ParseWithVar) {
     Node *root = new Node(1);
     add(root, 2);
     add(root, 3);
