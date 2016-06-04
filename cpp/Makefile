@@ -22,10 +22,10 @@ CPPFLAGS += -isystem $(GTEST_DIR)/include
 CXXFLAGS += -g -Wall -Wextra -pthread
 
 # All tests.
-TESTS = $(BUILD_DIR)/test_binary_tree.o $(BUILD_DIR)/test_odd_occurrences_in_array.o
+TESTS = test_binary_tree.o test_odd_occurrences_in_array.o
 
 # All sources.
-OBJECTS = $(BUILD_DIR)/binary_tree.o $(BUILD_DIR)/odd_occurrences_in_array.o
+OBJECTS = binary_tree.o odd_occurrences_in_array.o
 
 # Housekeeping targets
 all : run_tests
@@ -39,26 +39,26 @@ clean :
 # googletest targets
 GTEST_SRCS_ = $(GTEST_DIR)/src/*.cc $(GTEST_DIR)/src/*.h $(GTEST_HEADERS)
 
-$(BUILD_DIR)/gtest-all.o : $(GTEST_SRCS_)
+gtest-all.o : $(GTEST_SRCS_)
 	$(CXX) $(CPPFLAGS) -I$(GTEST_DIR) $(CXXFLAGS) -c \
-            $(GTEST_DIR)/src/gtest-all.cc -o $@
+            $(GTEST_DIR)/src/gtest-all.cc -o $(BUILD_DIR)/$@
 
-$(BUILD_DIR)/gtest_main.o : $(GTEST_SRCS_)
+gtest_main.o : $(GTEST_SRCS_)
 	$(CXX) $(CPPFLAGS) -I$(GTEST_DIR) $(CXXFLAGS) -c \
-            $(GTEST_DIR)/src/gtest_main.cc -o $@
+            $(GTEST_DIR)/src/gtest_main.cc -o $(BUILD_DIR)/$@
 
-$(BUILD_DIR)/gtest.a : $(BUILD_DIR)/gtest-all.o
-	$(AR) $(ARFLAGS) $@ $^
+gtest.a : gtest-all.o
+	$(AR) $(ARFLAGS) $(BUILD_DIR)/$@ $(addprefix $(BUILD_DIR)/,$^)
 
-$(BUILD_DIR)/gtest_main.a : $(BUILD_DIR)/gtest-all.o $(BUILD_DIR)/gtest_main.o
-	$(AR) $(ARFLAGS) $@ $^
+gtest_main.a : gtest-all.o gtest_main.o
+	$(AR) $(ARFLAGS) $(BUILD_DIR)/$@ $(addprefix $(BUILD_DIR)/,$^)
 
 # tests targets
-$(OBJECTS): $(BUILD_DIR)/%.o: $(USER_DIR)/%.cpp
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
+$(OBJECTS): %.o: $(USER_DIR)/%.cpp
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $(BUILD_DIR)/$@
 
-$(TESTS): $(BUILD_DIR)/%.o: $(TEST_DIR)/%.cpp
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
+$(TESTS): %.o: $(TEST_DIR)/%.cpp
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $(BUILD_DIR)/$@
 
-run_tests : $(OBJECTS) $(BUILD_DIR)/gtest_main.a $(TESTS)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
+run_tests : $(OBJECTS) $(TESTS) gtest_main.a
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $(addprefix $(BUILD_DIR)/,$^) -o $@
