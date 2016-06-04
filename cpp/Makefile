@@ -21,9 +21,10 @@ CPPFLAGS += -isystem $(GTEST_DIR)/include
 # To get verbose, add -v here.
 CXXFLAGS += -g -Wall -Wextra -pthread
 
-# All tests produced by this Makefile.
+# All tests.
 TESTS = $(BUILD_DIR)/test_binary_tree.o $(BUILD_DIR)/test_odd_occurrences_in_array.o
 
+# All sources.
 OBJECTS = $(BUILD_DIR)/binary_tree.o $(BUILD_DIR)/odd_occurrences_in_array.o
 
 # Housekeeping targets
@@ -59,9 +60,5 @@ $(OBJECTS): $(BUILD_DIR)/%.o: $(USER_DIR)/%.cpp
 $(TESTS): $(BUILD_DIR)/%.o: $(TEST_DIR)/%.cpp
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
 
-run_tests : $(BUILD_DIR)/binary_tree.o \
-	$(BUILD_DIR)/odd_occurrences_in_array.o \
-	$(BUILD_DIR)/test_binary_tree.o \
-	$(BUILD_DIR)/test_odd_occurrences_in_array.o \
-	$(BUILD_DIR)/gtest_main.a
+run_tests : $(OBJECTS) $(BUILD_DIR)/gtest_main.a $(TESTS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
