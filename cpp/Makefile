@@ -22,7 +22,9 @@ CPPFLAGS += -isystem $(GTEST_DIR)/include
 CXXFLAGS += -g -Wall -Wextra -pthread
 
 # All tests produced by this Makefile.
-TESTS = run_tests
+TESTS = $(BUILD_DIR)/test_binary_tree.o $(BUILD_DIR)/test_odd_occurrences_in_array.o
+
+OBJECTS = $(BUILD_DIR)/binary_tree.o $(BUILD_DIR)/odd_occurrences_in_array.o
 
 # Housekeeping targets
 all : run_tests
@@ -51,17 +53,11 @@ $(BUILD_DIR)/gtest_main.a : $(BUILD_DIR)/gtest-all.o $(BUILD_DIR)/gtest_main.o
 	$(AR) $(ARFLAGS) $@ $^
 
 # tests targets
-$(BUILD_DIR)/binary_tree.o : $(USER_DIR)/binary_tree.cpp
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/binary_tree.cpp -o $@
+$(OBJECTS): $(BUILD_DIR)/%.o: $(USER_DIR)/%.cpp
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
 
-$(BUILD_DIR)/odd_occurrences_in_array.o : $(USER_DIR)/odd_occurrences_in_array.cpp
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/odd_occurrences_in_array.cpp -o $@
-
-$(BUILD_DIR)/test_binary_tree.o : $(TEST_DIR)/test_binary_tree.cpp
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(TEST_DIR)/test_binary_tree.cpp -o $@
-
-$(BUILD_DIR)/test_odd_occurrences_in_array.o : $(TEST_DIR)/test_odd_occurrences_in_array.cpp
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(TEST_DIR)/test_odd_occurrences_in_array.cpp -o $@
+$(TESTS): $(BUILD_DIR)/%.o: $(TEST_DIR)/%.cpp
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
 
 run_tests : $(BUILD_DIR)/binary_tree.o \
 	$(BUILD_DIR)/odd_occurrences_in_array.o \
