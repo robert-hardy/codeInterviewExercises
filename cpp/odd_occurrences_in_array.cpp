@@ -2,7 +2,7 @@
    Problem found at: https://codility.com/programmers/task/odd_occurrences_in_array/
 */
 
-#include "odd_occurrences_in_array.h"
+#include "odd_occurrences_in_array.hpp"
 
 #include <vector>
 #include <numeric>

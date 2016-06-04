@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 
-#include "../odd_occurrences_in_array.h"
+#include "../odd_occurrences_in_array.hpp"
 
 TEST(OddOccurrencesInArray, SimpleCase1) {
     static const int arr[] = {1, 1, 2, 2, 9};

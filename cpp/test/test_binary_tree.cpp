@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 
-#include "../binary_tree.h"
+#include "../binary_tree.hpp"
 
 TEST(BinaryTree, CreateSmallTree) {
     Node *root = new Node(1);

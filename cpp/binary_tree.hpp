@@ -1,5 +1,5 @@
-#ifndef BINARYTREE_H
-#define BINARYTREE_H
+#ifndef BINARYTREE_HPP
+#define BINARYTREE_HPP
 
 #include <string>
 
@@ -21,4 +21,4 @@ void parse_print(Node *r);
 
 std::string parse(Node *r);
 
-#endif /* BINARYTREE_H */
+#endif /* BINARYTREE_HPP */

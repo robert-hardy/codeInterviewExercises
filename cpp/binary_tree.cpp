@@ -1,4 +1,4 @@
-#include "binary_tree.h"
+#include "binary_tree.hpp"
 
 #include <boost/lexical_cast.hpp>
 #include <iostream>
