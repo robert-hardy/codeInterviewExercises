@@ -4,6 +4,9 @@
 
 #include "odd_occurrences_in_array.h"
 
+#include <vector>
+#include <numeric>
+
 int my_xor(int x, int y) {
     return x^y;
 }
