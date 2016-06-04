@@ -1,6 +1,6 @@
-#include "../binary_tree.h"
-#include "../odd_occurrences_in_array.h"
 #include "gtest/gtest.h"
+
+#include "../binary_tree.h"
 
 TEST(BinaryTree, CreateSmallTree) {
     Node *root = new Node(1);
@@ -34,12 +34,4 @@ TEST(BinaryTree, ParseWithVar) {
     add(root, 4);
     std::string output = parse(root);
     ASSERT_EQ(output, "1243");
-}
-
-
-TEST(OddOccurrencesInArray, FunctionExists) {
-    static const int arr[] = {1, 1, 2, 2, 3};
-    std::vector<int> A(arr, arr+5);
-    int result = solution(A);
-    ASSERT_EQ(result, 3);
 }

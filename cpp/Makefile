@@ -24,7 +24,6 @@ CXXFLAGS += -g -Wall -Wextra -pthread
 # All tests produced by this Makefile.
 TESTS = run_tests
 
-
 # Housekeeping targets
 all : run_tests
 
@@ -58,8 +57,15 @@ $(BUILD_DIR)/binary_tree.o : $(USER_DIR)/binary_tree.cpp
 $(BUILD_DIR)/odd_occurrences_in_array.o : $(USER_DIR)/odd_occurrences_in_array.cpp
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/odd_occurrences_in_array.cpp -o $@
 
-$(BUILD_DIR)/run_tests.o : $(TEST_DIR)/test_binary_tree.cpp
+$(BUILD_DIR)/test_binary_tree.o : $(TEST_DIR)/test_binary_tree.cpp
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(TEST_DIR)/test_binary_tree.cpp -o $@
 
-run_tests : $(BUILD_DIR)/binary_tree.o $(BUILD_DIR)/odd_occurrences_in_array.o $(BUILD_DIR)/run_tests.o $(BUILD_DIR)/gtest_main.a
+$(BUILD_DIR)/test_odd_occurrences_in_array.o : $(TEST_DIR)/test_odd_occurrences_in_array.cpp
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(TEST_DIR)/test_odd_occurrences_in_array.cpp -o $@
+
+run_tests : $(BUILD_DIR)/binary_tree.o \
+	$(BUILD_DIR)/odd_occurrences_in_array.o \
+	$(BUILD_DIR)/test_binary_tree.o \
+	$(BUILD_DIR)/test_odd_occurrences_in_array.o \
+	$(BUILD_DIR)/gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
