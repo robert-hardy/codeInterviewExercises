@@ -5,7 +5,7 @@ This repository contains solutions for 'Codility' type interview exercises.
 In each directory there is a `Readme.md` which gives links to the questions
 themselves.
 
-A note about the tests
+A note about the (unit)tests
 -------
 Since I use TDD very much as part of the design process, all of the code has
 tests of one form or another. However, the intention was not to make the
