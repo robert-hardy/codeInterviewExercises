@@ -22,6 +22,9 @@ USER_DIR = .
 # Where to find tests.
 TEST_DIR = test
 
+# Where to build the intermediate files
+BUILD_DIR = build
+
 # Flags passed to the preprocessor.
 # Set Google Test's header directory as a system directory, such that
 # the compiler doesn't generate warnings in Google Test headers.
@@ -44,7 +47,7 @@ GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
 all : $(TESTS)
 
 clean :
-	rm -f $(TESTS) gtest.a gtest_main.a *.o
+	rm -f $(TESTS) $(BUILD_DIR)/gtest.a $(BUILD_DIR)/gtest_main.a *.o
 
 # Builds gtest.a and gtest_main.a.
 
@@ -64,10 +67,10 @@ gtest_main.o : $(GTEST_SRCS_)
 	$(CXX) $(CPPFLAGS) -I$(GTEST_DIR) $(CXXFLAGS) -c \
             $(GTEST_DIR)/src/gtest_main.cc
 
-gtest.a : gtest-all.o
+$(BUILD_DIR)/gtest.a : gtest-all.o
 	$(AR) $(ARFLAGS) $@ $^
 
-gtest_main.a : gtest-all.o gtest_main.o
+$(BUILD_DIR)/gtest_main.a : gtest-all.o gtest_main.o
 	$(AR) $(ARFLAGS) $@ $^
 
 # Builds a sample test.  A test should link with either gtest.a or
@@ -81,5 +84,5 @@ test_all.o : $(TEST_DIR)/test_all.cpp \
                      $(USER_DIR)/binary_tree.h $(GTEST_HEADERS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(TEST_DIR)/test_all.cpp
 
-test_all : binary_tree.o test_all.o gtest_main.a
+test_all : binary_tree.o test_all.o $(BUILD_DIR)/gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
