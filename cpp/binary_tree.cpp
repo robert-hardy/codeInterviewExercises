@@ -3,12 +3,20 @@
 #include <boost/lexical_cast.hpp>
 #include <iostream>
 
-Node::Node(int val) {
-    this->value = val;
-    this->left = 0;
-    this->right = 0;
+struct Node {
+    int value;
+    Node *left;
+    Node *right;
+    Node(int val) {
+        this->value = val;
+        this->left = 0;
+        this->right = 0;
+    }
 };
 
+Node *make_tree(int val) {
+    return new Node(val);
+}
 
 void add(Node *n, int val) {
     Node *new_node = new Node(val);

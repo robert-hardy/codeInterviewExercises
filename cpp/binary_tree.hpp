@@ -3,13 +3,9 @@
 
 #include <string>
 
-struct Node {
-    int value;
-    Node *left;
-    Node *right;
+struct Node;
 
-    Node(int);
-};
+Node *make_tree(int);
 
 void add(Node *r, int val);
 
