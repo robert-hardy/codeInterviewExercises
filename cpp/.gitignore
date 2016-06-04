@@ -1,4 +1,4 @@
 *.o
 *.a
 breakpoints
-test_all
+run_tests
