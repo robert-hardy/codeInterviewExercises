@@ -2,6 +2,7 @@
 GTEST_DIR = /home/robert/googletest/googletest
 GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
                 $(GTEST_DIR)/include/gtest/internal/*.h
+GTEST_SRCS_ = $(GTEST_DIR)/src/*.cc $(GTEST_DIR)/src/*.h $(GTEST_HEADERS)
 
 # Where to find user code.
 USER_DIR = .
@@ -37,8 +38,6 @@ clean :
 	rm -f run_tests $(BUILD_DIR)/gtest.a $(BUILD_DIR)/gtest_main.a $(BUILD_DIR)/*.o
 
 # googletest targets
-GTEST_SRCS_ = $(GTEST_DIR)/src/*.cc $(GTEST_DIR)/src/*.h $(GTEST_HEADERS)
-
 gtest-all.o : $(GTEST_SRCS_)
 	$(CXX) $(CPPFLAGS) -I$(GTEST_DIR) $(CXXFLAGS) -c \
             $(GTEST_DIR)/src/gtest-all.cc -o $(BUILD_DIR)/$@
@@ -53,11 +52,11 @@ gtest.a : gtest-all.o
 gtest_main.a : gtest-all.o gtest_main.o
 	$(AR) $(ARFLAGS) $(BUILD_DIR)/$@ $(addprefix $(BUILD_DIR)/,$^)
 
-# tests targets
-$(OBJECTS): %.o: $(USER_DIR)/%.cpp
+# project targets
+$(OBJECTS) : %.o: $(USER_DIR)/%.cpp
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $(BUILD_DIR)/$@
 
-$(TESTS): %.o: $(TEST_DIR)/%.cpp
+$(TESTS) : %.o: $(TEST_DIR)/%.cpp
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $(BUILD_DIR)/$@
 
 run_tests : $(OBJECTS) $(TESTS) gtest_main.a
