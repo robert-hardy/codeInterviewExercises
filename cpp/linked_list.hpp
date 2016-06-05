@@ -6,9 +6,7 @@
 
 struct li {
     std::string value;
-    li(std::string val) {
-        value = val;
-    };
+    li(std::string);
 };
 
 li *make_list(std::vector<std::string>);
