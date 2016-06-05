@@ -29,10 +29,17 @@ TESTS = test_binary_tree.o test_odd_occurrences_in_array.o
 OBJECTS = binary_tree.o odd_occurrences_in_array.o
 
 # Housekeeping targets
-all : run_tests
+all : directories run_tests
 
-run: run_tests
+run: directories run_tests
 	./run_tests
+
+.PHONY: directories
+
+directories: ${BUILD_DIR}
+
+${BUILD_DIR}:
+	        mkdir -p ${BUILD_DIR}
 
 clean :
 	rm -f run_tests $(BUILD_DIR)/gtest.a $(BUILD_DIR)/gtest_main.a $(BUILD_DIR)/*.o
