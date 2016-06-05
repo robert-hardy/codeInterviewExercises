@@ -11,7 +11,7 @@ numbers that add up to a given target.
 that can be expressed as the sum of cubes in more than one way (using integers
 less than some level N, where N=1000 was given as the exercise).
 * Binary tree: a few different ways to traverse a tree, for example using
-`yield` (based on a StackOverflow answer
+`yield` (inspired by a StackOverflow answer
 [here](http://stackoverflow.com/a/26952125/1243435)).
 
 Other snippets
