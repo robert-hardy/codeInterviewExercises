@@ -6,6 +6,7 @@
 
 struct li {
     std::string value;
+    li *next;
     li(std::string);
 };
 

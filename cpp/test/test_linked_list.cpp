@@ -15,3 +15,12 @@ TEST(LinkedList, CreateSingletonList) {
     li *result = make_list(v);
     ASSERT_EQ(result->value, "hello");
 }
+
+TEST(LinkedList, CreateListOfTwoItems) {
+    const char *init[] = {"hello", "world"};
+    std::vector<std::string> v(init, init + sizeof(init)/sizeof(init[0]));
+    li *result = make_list(v);
+    ASSERT_EQ(result->value, "hello");
+    ASSERT_TRUE(result->next != NULL);
+    ASSERT_EQ(result->next->value, "world");
+}
