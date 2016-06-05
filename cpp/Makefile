@@ -42,7 +42,8 @@ ${BUILD_DIR}:
 	        mkdir -p ${BUILD_DIR}
 
 clean :
-	rm -f run_tests $(BUILD_DIR)/gtest.a $(BUILD_DIR)/gtest_main.a $(BUILD_DIR)/*.o
+	rm -f run_tests
+	rm -rf $(BUILD_DIR)
 
 # googletest targets
 gtest-all.o : $(GTEST_SRCS_)
