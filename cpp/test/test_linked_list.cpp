@@ -8,3 +8,10 @@ TEST(LinkedList, CheckCanInitializeVector) {
     ASSERT_EQ(v[0], "hello");
     ASSERT_EQ(v[1], "world");
 }
+
+TEST(LinkedList, CreateSingletonList) {
+    const char *init[] = {"hello"};
+    std::vector<std::string> v(init, init + sizeof(init)/sizeof(init[0]));
+    li *result = make_list(v);
+    ASSERT_EQ(result->value, "hello");
+}

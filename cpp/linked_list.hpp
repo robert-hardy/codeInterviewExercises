@@ -4,7 +4,12 @@
 #include <string>
 #include <vector>
 
-struct li;
+struct li {
+    std::string value;
+    li(std::string val) {
+        value = val;
+    };
+};
 
 li *make_list(std::vector<std::string>);
 
