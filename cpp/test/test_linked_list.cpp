@@ -14,6 +14,7 @@ TEST(LinkedList, CreateSingletonList) {
     std::vector<std::string> v(init, init + sizeof(init)/sizeof(init[0]));
     li *result = make_list(v);
     ASSERT_EQ(result->value, "hello");
+    ASSERT_TRUE(result->next == NULL);
 }
 
 TEST(LinkedList, CreateListOfTwoItems) {
