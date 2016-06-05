@@ -17,8 +17,8 @@ TEST(LinkedList, CreateSingletonList) {
     ASSERT_TRUE(result->next == NULL);
 }
 
-TEST(LinkedList, CreateListOfTwoItems) {
-    const char *init[] = {"hello", "world"};
+TEST(LinkedList, CreateLongerList) {
+    const char *init[] = {"hello", "there", "world"};
     std::vector<std::string> v(init, init + sizeof(init)/sizeof(init[0]));
     li *result = make_list(v);
     ASSERT_EQ(result->value, "hello");
