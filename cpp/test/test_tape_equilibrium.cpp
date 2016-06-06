@@ -48,15 +48,22 @@ TEST(TapeEquilibrium, NoSolution) {
 }
 
 TEST(TapeEquilibrium, TestBigNumbers) {
-    int init[] = {2147483648, 1, -2147483648};
+    int init[] = {2147483648, 1, 2147483648};
     std::vector<int> A(init, init+sizeof(init)/sizeof(init[0]));
     int result = TapeEquilibrium::solution(A);
     ASSERT_EQ(result, 1);
 }
 
 TEST(TapeEquilibrium, TestLongArray) {
-    std::vector<int> A(100001, 1);
-    ASSERT_EQ(A.size(), 100001);
+    std::vector<int> A(101, 1);
+    ASSERT_EQ(A.size(), 101);
     int result = TapeEquilibrium::solution(A);
-    ASSERT_EQ(result, 50000);
+    ASSERT_EQ(result, 50);
+}
+
+TEST(TapeEquilibrium, TestLongArrayWithBigNumbers) {
+    std::vector<int> A(11, 2147483648);
+    ASSERT_EQ(A.size(), 11);
+    int result = TapeEquilibrium::solution(A);
+    ASSERT_EQ(result, 5);
 }
