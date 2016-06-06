@@ -1,5 +1,7 @@
 #include "codility.hpp"
 
+#include <algorithm>
+
 namespace Codility1 {
 
 int solution(int) {
@@ -20,19 +22,20 @@ namespace Codility3 {
 
 int solution(tree *t) {
     int result = 0;
-    path_count_helper(t, result);
+    path_count_helper(t, t->x, result);
     return result;
 }
 
-void path_count_helper(tree *t, int &result) {
-    if (!t->l && !t->r) {
+void path_count_helper(tree *t, int biggest_seen_so_far, int &result) {
+    if (!t->l && !t->r && t->x >= biggest_seen_so_far) {
         ++result;
     }
+    int new_biggest = std::max(biggest_seen_so_far, t->x);
     if (t->l) {
-        path_count_helper(t->l, result);
+        path_count_helper(t->l, new_biggest, result);
     }
     if (t->r) {
-        path_count_helper(t->r, result);
+        path_count_helper(t->r, new_biggest, result);
     }
 }
 

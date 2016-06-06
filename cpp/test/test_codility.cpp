@@ -48,7 +48,7 @@ TEST(Codility3, TestCountHelper) {
     using namespace Codility3;
     tree *foo = new tree(10);
     int result = 0;
-    path_count_helper(foo, result);
+    path_count_helper(foo, 0, result);
     ASSERT_EQ(result, 1);
 }
 

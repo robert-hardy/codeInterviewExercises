@@ -24,7 +24,7 @@ namespace Codility3 {
 
     void add_left(tree *T, int val);
     void add_right(tree *T, int val);
-    void path_count_helper(tree *t, int &result);
+    void path_count_helper(tree *t, int biggest_seen_so_far, int &result);
     int solution(tree *T);
 }
 
