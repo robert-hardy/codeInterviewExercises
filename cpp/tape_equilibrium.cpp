@@ -18,4 +18,13 @@ int sum_to(std::vector<int> &A, std::vector<int>::iterator i) {
     return result;
 }
 
+int sum_from(std::vector<int> &A, std::vector<int>::iterator i) {
+    std::vector<int>::iterator j(i);
+    int result = 0;
+    for (; j < A.end(); j++) {
+        result += *j;
+    }
+    return result;
+}
+
 }
