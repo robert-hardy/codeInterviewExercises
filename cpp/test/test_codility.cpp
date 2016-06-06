@@ -19,7 +19,7 @@ TEST(Codility3, GettingStarted) {
     tree *foo = new tree(10);
     int result = solution(foo);
     ASSERT_EQ(foo->x, 10);
-    ASSERT_EQ(result, 3);
+    ASSERT_EQ(result, 1);
 }
 
 TEST(Codility3, BuildBasicTree) {

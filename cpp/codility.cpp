@@ -18,8 +18,10 @@ int solution(int) {
 
 namespace Codility3 {
 
-int solution(tree *T) {
-    return 3;
+int solution(tree *t) {
+    int result = 0;
+    path_count_helper(t, result);
+    return result;
 }
 
 void path_count_helper(tree *t, int &result) {
