@@ -1,8 +1,10 @@
 #ifndef CODILITY_HPP
 #define CODILITY_HPP
 
+#include <vector>
+
 namespace Codility1 {
-    int solution(int);
+    int solution(std::vector<int> &A);
 }
 
 namespace Codility2 {

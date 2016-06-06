@@ -4,7 +4,7 @@
 
 namespace Codility1 {
 
-int solution(int) {
+int solution(std::vector<int> &A) {
     return 1;
 }
 

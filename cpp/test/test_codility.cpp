@@ -2,9 +2,13 @@
 
 #include "../codility.hpp"
 
-TEST(Codility1, GettingStarted) {
+TEST(Codility1, CheckInitialization) {
     using namespace Codility1;
-    int result = solution(1);
+    int init[] = {2, 2, 2, 2, 1, 2, -1, 2, 1, 3};
+    std::vector<int> A(init, init+sizeof(init)/sizeof(init[0]));
+    EXPECT_EQ(A.size(), 10);
+    EXPECT_EQ(A.front(), 2);
+    int result = solution(A);
     ASSERT_EQ(result, 1);
 }
 
