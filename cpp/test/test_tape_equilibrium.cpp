@@ -26,7 +26,7 @@ TEST(TapeEquilibrium, CheckSumFrom) {
     i++;
     i++;
     int result = TapeEquilibrium::sum_from(A, i);
-    ASSERT_EQ(result, 7);
+    ASSERT_EQ(result, 4);
 }
 
 TEST(TapeEquilibrium, CheckSumFromDoesNotDamageIterator) {
@@ -36,6 +36,6 @@ TEST(TapeEquilibrium, CheckSumFromDoesNotDamageIterator) {
     i++;
     i++;
     int result = TapeEquilibrium::sum_from(A, i);
-    ASSERT_EQ(result, 7);
+    ASSERT_EQ(result, 4);
     ASSERT_EQ(*i, 3);
 }
