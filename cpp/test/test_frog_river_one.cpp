@@ -30,9 +30,16 @@ TEST(FrogRiverOne, GeneralCase) {
     ASSERT_EQ(result, 5);
 }
 
-TEST(FrogRiverOne, InitializeVector) {
-    std::vector<int> occurrences(5, 0);
-    ASSERT_EQ(occurrences.front(), 0);
-    ASSERT_EQ(occurrences.back(), 0);
-    ASSERT_EQ(occurrences.size(), 5);
+TEST(FrogRiverOne, NotPossible) {
+    int init_A[] = {1, 4, 4, 4, 4, 4, 4, 4};
+    std::vector<int> A(init_A, init_A + sizeof(A)/sizeof(A[0]));
+    int result = solution(2, A);
+    ASSERT_EQ(result, -1);
+}
+
+TEST(FrogRiverOne, SingleElement) {
+    int init_A[] = {1};
+    std::vector<int> A(init_A, init_A + sizeof(A)/sizeof(A[0]));
+    int result = solution(1, A);
+    ASSERT_EQ(result, 0);
 }
