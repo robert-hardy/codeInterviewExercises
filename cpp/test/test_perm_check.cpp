@@ -40,3 +40,10 @@ TEST(PermCheck, CheckFalseCase) {
     int result = PermCheck::solution(A);
     ASSERT_EQ(result, 0);
 }
+
+TEST(PermCheck, CheckFalseCaseWithCorrectTotalSum) {
+    int init[] = {1, 2, 2, 5};
+    std::vector<int> A(init, init+sizeof(init)/sizeof(init[0]));
+    int result = PermCheck::solution(A);
+    ASSERT_EQ(result, 0);
+}
