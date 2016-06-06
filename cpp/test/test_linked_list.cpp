@@ -50,3 +50,19 @@ TEST(LinkedList, PrintListToString) {
     std::string result = to_string(lst);
     ASSERT_EQ(result, "hello there happy world");
 }
+
+TEST(LinkedList, PrintSingletonListToString) {
+    const char *init[] = {"hello"};
+    std::vector<std::string> v(init, init + sizeof(init)/sizeof(init[0]));
+    li *lst = make_list(v);
+    std::string result = to_string(lst);
+    ASSERT_EQ(result, "hello");
+}
+
+TEST(LinkedList, PrintSingletonListWithSpaceToString) {
+    const char *init[] = {"  hello  "};
+    std::vector<std::string> v(init, init + sizeof(init)/sizeof(init[0]));
+    li *lst = make_list(v);
+    std::string result = to_string(lst);
+    ASSERT_EQ(result, "  hello  ");
+}
