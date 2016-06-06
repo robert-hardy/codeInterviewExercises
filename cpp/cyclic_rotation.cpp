@@ -2,9 +2,6 @@
 
 std::vector<int> solution(std::vector<int> &A, int K) {
     std::vector<int> result(A);
-    if (K == 0) {
-        return result;
-    }
     int buffer;
     for (int i=0; i<K; i++) {
         buffer = result.back();
