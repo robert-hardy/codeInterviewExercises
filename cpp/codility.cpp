@@ -27,7 +27,7 @@ int solution(tree *t) {
 }
 
 void path_count_helper(tree *t, int biggest_seen_so_far, int &result) {
-    if (!t->l && !t->r && t->x >= biggest_seen_so_far) {
+    if (t->x >= biggest_seen_so_far) {
         ++result;
     }
     int new_biggest = std::max(biggest_seen_so_far, t->x);

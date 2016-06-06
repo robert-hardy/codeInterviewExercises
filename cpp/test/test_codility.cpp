@@ -32,7 +32,7 @@ TEST(Codility3, BuildBasicTree) {
     ASSERT_EQ(foo->r->x, 23);
 }
 
-TEST(Codility3, CountPaths) {
+TEST(Codility3, CountNodes) {
     using namespace Codility3;
     tree *foo = new tree(10);
     add_left(foo, 13);
@@ -41,7 +41,7 @@ TEST(Codility3, CountPaths) {
     ASSERT_EQ(foo->l->x, 13);
     ASSERT_EQ(foo->r->x, 23);
     int result = solution(foo);
-    ASSERT_EQ(result, 2);
+    ASSERT_EQ(result, 3);
 }
 
 TEST(Codility3, TestCountHelper) {
@@ -52,7 +52,7 @@ TEST(Codility3, TestCountHelper) {
     ASSERT_EQ(result, 1);
 }
 
-TEST(Codility3, CountVisiblePaths) {
+TEST(Codility3, CountVisibleNodes) {
     using namespace Codility3;
     tree *foo = new tree(10);
     add_left(foo, 13);
@@ -61,5 +61,5 @@ TEST(Codility3, CountVisiblePaths) {
     ASSERT_EQ(foo->l->x, 13);
     ASSERT_EQ(foo->r->x, 9);
     int result = solution(foo);
-    ASSERT_EQ(result, 1);
+    ASSERT_EQ(result, 2);
 }
