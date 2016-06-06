@@ -46,3 +46,10 @@ TEST(TapeEquilibrium, NoSolution) {
     int result = TapeEquilibrium::solution(A);
     ASSERT_EQ(result, -1);
 }
+
+TEST(TapeEquilibrium, TestBigNumbers) {
+    int init[] = {2147483648, 1, -2147483648};
+    std::vector<int> A(init, init+sizeof(init)/sizeof(init[0]));
+    int result = TapeEquilibrium::solution(A);
+    ASSERT_EQ(result, 1);
+}
