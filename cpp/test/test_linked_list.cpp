@@ -29,3 +29,14 @@ TEST(LinkedList, CreateManualList) {
     ASSERT_TRUE(li0->next->next != NULL);
     ASSERT_EQ(li0->next->next->value, "world");
 }
+
+TEST(LinkedList, CreateLlistWithFunction) {
+    const char *init[] = {"hello", "there", "world"};
+    std::vector<std::string> v(init, init + sizeof(init)/sizeof(init[0]));
+    li *result = make_list(v);
+    ASSERT_EQ(result->value, "hello");
+    ASSERT_TRUE(result->next != NULL);
+    ASSERT_EQ(result->next->value, "there");
+    ASSERT_TRUE(result->next->next != NULL);
+    ASSERT_EQ(result->next->next->value, "world");
+}
