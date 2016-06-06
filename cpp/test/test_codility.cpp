@@ -45,10 +45,10 @@ TEST(Codility1, CheckSliceCounterReturns3) {
 
 TEST(Codility1, CheckSolutionFunctionReturns3) {
     using namespace Codility1;
-    int init[] = {2, 3, 4, 2, 1};
+    int init[] = {2, 2, 2, 2, 1, 2, -1, 2, 1, 3};
     std::vector<int> A(init, init+sizeof(init)/sizeof(init[0]));
     int result = solution(A);
-    ASSERT_EQ(result, 3);
+    ASSERT_EQ(result, 4);
 }
 
 
