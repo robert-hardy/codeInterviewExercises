@@ -18,7 +18,7 @@ int solution(int) {
 
 namespace Codility3 {
 
-int solution(int) {
+int solution(tree *T) {
     return 3;
 }
 

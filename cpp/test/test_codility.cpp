@@ -16,6 +16,8 @@ TEST(Codility2, GettingStarted) {
 
 TEST(Codility3, GettingStarted) {
     using namespace Codility3;
-    tree *result = new tree(10);
-    ASSERT_EQ(result->x, 10);
+    tree *foo = new tree(10);
+    int result = solution(foo);
+    ASSERT_EQ(foo->x, 10);
+    ASSERT_EQ(result, 3);
 }

@@ -21,7 +21,7 @@ namespace Codility3 {
             this->r = 0;
         }
     };
-    int solution(int);
+    int solution(tree *T);
 }
 
 #endif /* CODILITY_HPP */
