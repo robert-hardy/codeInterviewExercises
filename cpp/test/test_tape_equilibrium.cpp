@@ -55,8 +55,8 @@ TEST(TapeEquilibrium, TestBigNumbers) {
 }
 
 TEST(TapeEquilibrium, TestLongArray) {
-    std::vector<int> A(1001, 1);
-    ASSERT_EQ(A.size(), 1001);
+    std::vector<int> A(100001, 1);
+    ASSERT_EQ(A.size(), 100001);
     int result = TapeEquilibrium::solution(A);
-    ASSERT_EQ(result, 500);
+    ASSERT_EQ(result, 50000);
 }
