@@ -3,7 +3,7 @@
 
 #include <vector>
 
-int solution(int X, std::vector<int> &A, int N);
+int solution(int X, std::vector<int> &A);
 
 #endif /* FROGRIVERONE_HPP */
 
