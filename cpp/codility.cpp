@@ -28,6 +28,12 @@ void path_count_helper(tree *t, int &result) {
     if (!t->l && !t->r) {
         ++result;
     }
+    if (t->l) {
+        path_count_helper(t->l, result);
+    }
+    if (t->r) {
+        path_count_helper(t->r, result);
+    }
 }
 
 void add_left(tree *t, int val) {
