@@ -65,3 +65,10 @@ TEST(PermCheck, CheckXORStuff) {
     }
     ASSERT_EQ(xor_result, 0);
 }
+
+TEST(PermCheck, CheckExtremeCaseLargeVal) {
+    int init[] = {1000000000};
+    std::vector<int> A(init, init+sizeof(init)/sizeof(init[0]));
+    int result = PermCheck::solution(A);
+    ASSERT_EQ(result, 0);
+}
