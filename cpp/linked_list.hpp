@@ -8,6 +8,7 @@ struct li {
     std::string value;
     li *next;
     li(std::string);
+    li(std::string, li *next);
 };
 
 li *make_list(std::vector<std::string>);

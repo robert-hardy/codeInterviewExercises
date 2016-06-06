@@ -4,6 +4,10 @@ li::li(std::string val) :
     value(val), next(0)
 {};
 
+li::li(std::string val, li *next) :
+    value(val), next(next)
+{};
+
 void join(li *head, li *tail) {
     head->next = tail;
 }
