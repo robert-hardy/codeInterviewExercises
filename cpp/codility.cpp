@@ -22,4 +22,9 @@ int solution(tree *T) {
     return 3;
 }
 
+void add_left(tree *t, int val) {
+    tree *new_node = new tree(val);
+    t->l = new_node;
+}
+
 }

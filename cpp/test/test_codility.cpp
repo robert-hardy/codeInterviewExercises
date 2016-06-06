@@ -21,3 +21,11 @@ TEST(Codility3, GettingStarted) {
     ASSERT_EQ(foo->x, 10);
     ASSERT_EQ(result, 3);
 }
+
+TEST(Codility3, BuildBasicTree) {
+    using namespace Codility3;
+    tree *foo = new tree(10);
+    add_left(foo, 13);
+    ASSERT_EQ(foo->x, 10);
+    ASSERT_EQ(foo->l->x, 13);
+}

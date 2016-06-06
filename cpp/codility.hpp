@@ -21,6 +21,8 @@ namespace Codility3 {
             this->r = 0;
         }
     };
+
+    void add_left(tree *T, int val);
     int solution(tree *T);
 }
 
