@@ -24,5 +24,18 @@ li *make_list(std::vector<std::string> values) {
 }
 
 std::string to_string(li *lst) {
-    return "hello";
+    std::string result(lst->value);
+    if (!lst->next) {
+        return result;
+    }
+    bool stop = false;
+    li *current_node = lst;
+    while (!stop) {
+        current_node = current_node->next;
+        result = result + " " + current_node->value;
+        if (!current_node->next) {
+            stop = true;
+        }
+    }
+    return result;
 }
