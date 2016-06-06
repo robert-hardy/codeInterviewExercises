@@ -8,6 +8,17 @@ int solution(std::vector<int> &A) {
     return 1;
 }
 
+int count_size(std::vector<int> &A, std::vector<int>::iterator i) {
+    std::vector<int>::iterator j(i);
+    int floor = *j;
+    for(; j < A.end(); j++) {
+        if (*j <= floor) {
+            return 1 + std::distance(i, j);
+        }
+    }
+    return std::distance(i, A.end());
+}
+
 }
 
 namespace Codility2 {

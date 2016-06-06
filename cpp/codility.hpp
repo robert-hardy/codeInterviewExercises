@@ -4,6 +4,7 @@
 #include <vector>
 
 namespace Codility1 {
+    int count_size(std::vector<int> &A, std::vector<int>::iterator i);
     int solution(std::vector<int> &A);
 }
 
