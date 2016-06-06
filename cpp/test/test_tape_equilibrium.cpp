@@ -2,10 +2,19 @@
 
 #include "../tape_equilibrium.hpp"
 
-TEST(TapeEquilibrium, GettingStarted) {
+TEST(TapeEquilibrium, BasicCase) {
     int init[] = {1, 3, 3, 4};
     std::vector<int> A(init, init+sizeof(init)/sizeof(init[0]));
     int result = TapeEquilibrium::solution(A);
     ASSERT_EQ(result, 2);
 }
 
+TEST(TapeEquilibrium, CheckSumTo) {
+    int init[] = {1, 3, 3, 4};
+    std::vector<int> A(init, init+sizeof(init)/sizeof(init[0]));
+    std::vector<int>::iterator i = A.begin();
+    i++;
+    i++;
+    int result = TapeEquilibrium::sum_to(A, i);
+    ASSERT_EQ(result, 4);
+}
