@@ -27,4 +27,9 @@ void add_left(tree *t, int val) {
     t->l = new_node;
 }
 
+void add_right(tree *t, int val) {
+    tree *new_node = new tree(val);
+    t->r = new_node;
+}
+
 }

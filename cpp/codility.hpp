@@ -23,6 +23,7 @@ namespace Codility3 {
     };
 
     void add_left(tree *T, int val);
+    void add_right(tree *T, int val);
     int solution(tree *T);
 }
 
