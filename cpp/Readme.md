@@ -8,8 +8,10 @@ the unpaired integer in an array.
   (interesting: the test file shows how to capture `stdout` in GoogleTest).
 * Linked list: build a linked list from a `vector` of `string` and carry out
 some manipulations on it.
-* [Cyclic rotation](https://codility.com/programmers/task/cyclic_rotation/)
+* [CyclicRotation](https://codility.com/programmers/task/cyclic_rotation/)
 Rotate a `vector<int>` by a certain amount.
+* [FrogRiverOne](https://codility.com/programmers/task/frog_river_one/) Find
+the earliest point at which we have seen all `X` integers in an array.
 
 GoogleTest
 ----
