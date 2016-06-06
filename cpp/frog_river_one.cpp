@@ -10,6 +10,11 @@ int solution(int X, std::vector<int> &A) {
     for (int i=0; i<X; i++) {
         occurrences[i] = first_occurrence(i+1, A);
     }
+    for (int i=0; i<X; i++) {
+        if (occurrences[i] == -1) {
+            return -1;
+        }
+    }
     int result = -1;
     for (int i=0; i<X; i++) {
         result = std::max(result, occurrences[i]);
