@@ -49,6 +49,14 @@ TEST(Codility1, CheckFindsSliceOfLength2AtIndex4) {
     ASSERT_EQ(result, 4);
 }
 
+TEST(Codility1, CheckExtremeValues) {
+    using namespace Codility1;
+    int init[] = {-2147438648, 2147438648};
+    std::vector<int> A(init, init+sizeof(init)/sizeof(init[0]));
+    int result = solution(A);
+    ASSERT_EQ(result, 0);
+}
+
 TEST(Codility1, CountSizeDoubleCheck) {
     using namespace Codility1;
     int init[] = {2, 2, 2, 2, 1, 2, -1, 2, 1, 3};
