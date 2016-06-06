@@ -52,7 +52,28 @@ TEST(Codility1, CheckFindsSliceOfLength2) {
     int slice_length = count_size(A, i);
     ASSERT_EQ(slice_length, 2);
     int result = solution(A);
-    ASSERT_EQ(result, 4);
+    ASSERT_EQ(result, 2);
+}
+
+TEST(Codility1, CountSizeDoubleCheck) {
+    using namespace Codility1;
+    int init[] = {2, 2, 2, 2, 1, 2, -1, 2, 1, 3};
+    std::vector<int> A(init, init+sizeof(init)/sizeof(init[0]));
+
+    std::vector<int>::iterator i = A.begin();
+    ASSERT_EQ(count_size(A, i), 1);
+    i++;
+    ASSERT_EQ(count_size(A, i), 1);
+    i++;
+    ASSERT_EQ(count_size(A, i), 1);
+    i++;
+    ASSERT_EQ(count_size(A, i), 1);
+    i++;
+    ASSERT_EQ(count_size(A, i), 2);
+    i++;
+    ASSERT_EQ(count_size(A, i), 1);
+    i++;
+    ASSERT_EQ(count_size(A, i), 2);
 }
 
 

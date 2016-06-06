@@ -21,6 +21,7 @@ int count_size(std::vector<int> &A, std::vector<int>::iterator i) {
         if (*j <= floor) {
             return std::distance(i, j);
         }
+        floor = *j;
     }
     return std::distance(i, A.end());
 }
