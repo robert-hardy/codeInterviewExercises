@@ -37,6 +37,13 @@ TEST(FrogRiverOne, NotPossible) {
     ASSERT_EQ(result, -1);
 }
 
+TEST(FrogRiverOne, AllLeavesInSamePlace) {
+    int init_A[] = {1, 2, 2, 2, 2, 2, 2, 2};
+    std::vector<int> A(init_A, init_A + sizeof(A)/sizeof(A[0]));
+    int result = solution(3, A);
+    ASSERT_EQ(result, -1);
+}
+
 TEST(FrogRiverOne, SingleElement) {
     int init_A[] = {1};
     std::vector<int> A(init_A, init_A + sizeof(A)/sizeof(A[0]));
