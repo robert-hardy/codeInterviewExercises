@@ -42,3 +42,11 @@ TEST(LinkedList, CreateListWithFunction) {
     ASSERT_TRUE(result->next->next->next != NULL);
     ASSERT_EQ(result->next->next->next->value, "world");
 }
+
+TEST(LinkedList, PrintListToString) {
+    const char *init[] = {"hello", "there", "happy", "world"};
+    std::vector<std::string> v(init, init + sizeof(init)/sizeof(init[0]));
+    li *lst = make_list(v);
+    std::string result = to_string(lst);
+    ASSERT_EQ(result, "hello there happy world");
+}

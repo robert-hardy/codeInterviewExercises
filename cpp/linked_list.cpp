@@ -22,3 +22,7 @@ li *make_list(std::vector<std::string> values) {
     }
     return current_node;
 }
+
+std::string to_string(li *lst) {
+    return "hello";
+}

@@ -13,4 +13,6 @@ struct li {
 
 li *make_list(std::vector<std::string>);
 
+std::string to_string(li *);
+
 #endif /* LINKEDLIST_HPP */
