@@ -57,6 +57,14 @@ TEST(Codility1, CheckExtremeValues) {
     ASSERT_EQ(result, 0);
 }
 
+TEST(Codility1, TestLongArray) {
+    using namespace Codility1;
+    std::vector<int> A(150000, -2147438648);
+    ASSERT_EQ(A.size(), 150000);
+    int result = solution(A);
+    ASSERT_EQ(result, 0);
+}
+
 TEST(Codility1, CountSizeDoubleCheck) {
     using namespace Codility1;
     int init[] = {2, 2, 2, 2, 1, 2, -1, 2, 1, 3};
