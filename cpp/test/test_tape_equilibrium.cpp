@@ -28,3 +28,14 @@ TEST(TapeEquilibrium, CheckSumFrom) {
     int result = TapeEquilibrium::sum_from(A, i);
     ASSERT_EQ(result, 7);
 }
+
+TEST(TapeEquilibrium, CheckSumFromDoesNotDamageIterator) {
+    int init[] = {1, 3, 3, 4};
+    std::vector<int> A(init, init+sizeof(init)/sizeof(init[0]));
+    std::vector<int>::iterator i = A.begin();
+    i++;
+    i++;
+    int result = TapeEquilibrium::sum_from(A, i);
+    ASSERT_EQ(result, 7);
+    ASSERT_EQ(*i, 3);
+}
