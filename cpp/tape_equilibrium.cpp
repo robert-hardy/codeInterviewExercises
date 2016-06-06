@@ -4,8 +4,8 @@ namespace TapeEquilibrium {
 
 int solution(std::vector<int> &A) {
     std::vector<int>::iterator i = A.begin();
-    int sum_left;
-    int sum_right;
+    long long sum_left;
+    long long sum_right;
     for (; i < A.end(); i++) {
         sum_left = sum_to(A, i);
         sum_right = sum_from(A, i);
@@ -16,19 +16,19 @@ int solution(std::vector<int> &A) {
     return -1;
 }
 
-int sum_to(std::vector<int> &A, std::vector<int>::iterator i) {
+long long sum_to(std::vector<int> &A, std::vector<int>::iterator i) {
     std::vector<int>::iterator j = A.begin();
-    int result = 0;
+    long long result = 0;
     for (; j < i; j++) {
         result += *j;
     }
     return result;
 }
 
-int sum_from(std::vector<int> &A, std::vector<int>::iterator i) {
+long long sum_from(std::vector<int> &A, std::vector<int>::iterator i) {
     std::vector<int>::iterator j(i);
     j++;
-    int result = 0;
+    long long result = 0;
     for (; j < A.end(); j++) {
         result += *j;
     }
