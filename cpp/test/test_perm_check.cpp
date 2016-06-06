@@ -6,5 +6,5 @@ TEST(PermCheck, CheckInitialization) {
     int init[] = {1, 2, 3, 4};
     std::vector<int> A(init, init+sizeof(init)/sizeof(init[0]));
     int result = PermCheck::solution(A);
-    ASSERT_EQ(result, 1);
+    ASSERT_EQ(result, 0);
 }
