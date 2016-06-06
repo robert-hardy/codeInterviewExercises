@@ -23,10 +23,10 @@ CPPFLAGS += -isystem $(GTEST_DIR)/include
 CXXFLAGS += -g -Wall -Wextra -pthread
 
 # All tests.
-TESTS = test_binary_tree.o test_odd_occurrences_in_array.o test_linked_list.o test_cyclic_rotation.o
+TESTS = test_binary_tree.o test_odd_occurrences_in_array.o test_linked_list.o test_cyclic_rotation.o test_frog_river_one.o
 
 # All sources.
-OBJECTS = binary_tree.o odd_occurrences_in_array.o linked_list.o cyclic_rotation.o
+OBJECTS = binary_tree.o odd_occurrences_in_array.o linked_list.o cyclic_rotation.o frog_river_one.o
 
 # Housekeeping targets
 all : directories run_tests
