@@ -10,6 +10,17 @@ namespace Codility2 {
 }
 
 namespace Codility3 {
+    struct tree {
+        int x;
+        tree *l;
+        tree *r;
+        tree(int val) :
+            x(val)
+        {
+            this->l = 0;
+            this->r = 0;
+        }
+    };
     int solution(int);
 }
 
