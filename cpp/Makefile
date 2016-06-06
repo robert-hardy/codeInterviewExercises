@@ -29,7 +29,8 @@ TESTS = test_binary_tree.o \
 	test_cyclic_rotation.o \
 	test_frog_river_one.o \
 	test_perm_check.o \
-	test_tape_equilibrium.o
+	test_tape_equilibrium.o \
+	test_codility.o
 
 # All sources.
 OBJECTS = binary_tree.o \
@@ -38,7 +39,8 @@ OBJECTS = binary_tree.o \
 	  cyclic_rotation.o \
 	  frog_river_one.o \
 	  perm_check.o \
-	  tape_equilibrium.o
+	  tape_equilibrium.o \
+	  codility.o
 
 # Housekeeping targets
 all : directories run_tests
