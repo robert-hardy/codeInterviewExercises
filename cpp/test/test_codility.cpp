@@ -34,6 +34,15 @@ TEST(Codility1, CheckSliceCounterReturns2) {
     ASSERT_EQ(result, 2);
 }
 
+TEST(Codility1, CheckSliceCounterReturns3) {
+    using namespace Codility1;
+    int init[] = {2, 3, 4, 2};
+    std::vector<int> A(init, init+sizeof(init)/sizeof(init[0]));
+    std::vector<int>::iterator i = A.begin();
+    int result = count_size(A, i);
+    ASSERT_EQ(result, 3);
+}
+
 TEST(Codility2, GettingStarted) {
     using namespace Codility2;
     int result = solution(1);
