@@ -12,13 +12,26 @@ TEST(Codility1, CheckInitialization) {
     ASSERT_EQ(result, 1);
 }
 
-TEST(Codility1, CheckSliceCounter) {
+TEST(Codility1, CheckSliceCounterReturns1) {
     using namespace Codility1;
     int init[] = {2, 2, 2, 2, 1, 2, -1, 2, 1, 3};
     std::vector<int> A(init, init+sizeof(init)/sizeof(init[0]));
     std::vector<int>::iterator i = A.begin();
     int result = count_size(A, i);
     ASSERT_EQ(result, 1);
+    i++;
+    int result2 = count_size(A, i);
+    ASSERT_EQ(result, 1);
+    ASSERT_EQ(*i, 2);
+}
+
+TEST(Codility1, CheckSliceCounterReturns2) {
+    using namespace Codility1;
+    int init[] = {2, 3, 2};
+    std::vector<int> A(init, init+sizeof(init)/sizeof(init[0]));
+    std::vector<int>::iterator i = A.begin();
+    int result = count_size(A, i);
+    ASSERT_EQ(result, 2);
 }
 
 TEST(Codility2, GettingStarted) {
