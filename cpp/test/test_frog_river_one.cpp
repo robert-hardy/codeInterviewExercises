@@ -25,3 +25,10 @@ TEST(FrogRiverOne, GeneralCase) {
     int result = solution(3, A, 8);
     ASSERT_EQ(result, 5);
 }
+
+TEST(FrogRiverOne, InitializeVector) {
+    std::vector<int> occurrences(5, 0);
+    ASSERT_EQ(occurrences.front(), 0);
+    ASSERT_EQ(occurrences.back(), 0);
+    ASSERT_EQ(occurrences.size(), 5);
+}

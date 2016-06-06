@@ -1,19 +1,20 @@
 #include "frog_river_one.hpp"
 
 #include <algorithm>
+#include <vector>
 
 int first_occurrence(int target, int A[], int N);
 
 int solution(int X, int A[], int N) {
-    if (X == 1) {
-        return first_occurrence(1, A, N);
+    std::vector<int> occurrences(X, -1);
+    for (int i=0; i<X; i++) {
+        occurrences[i] = first_occurrence(i+1, A, N);
     }
-    if (X == 2) {
-        int first_occurrence_of_1 = first_occurrence(1, A, N);
-        int first_occurrence_of_2 = first_occurrence(2, A, N);
-        return std::max(first_occurrence_of_1, first_occurrence_of_2);
+    int result = -1;
+    for (int i=0; i<X; i++) {
+        result = std::max(result, occurrences[i]);
     }
-    return -1;
+    return result;
 }
 
 int first_occurrence(int target, int A[], int N) {
