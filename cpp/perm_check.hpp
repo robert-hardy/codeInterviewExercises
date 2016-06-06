@@ -3,7 +3,9 @@
 
 #include <vector>
 
-int solution(std::vector<int> &A);
+namespace PermCheck {
+    int solution(std::vector<int> &A);
+}
 
 #endif /* PERMCHECK_HPP */
 
