@@ -30,3 +30,15 @@ TEST(CyclicRotation, RotateByOne) {
         EXPECT_EQ(result[i], expected_result[i]);
     }
 }
+
+TEST(CyclicRotation, RotateByTwo) {
+    int init[] = {1, 2, 3, 4};
+    std::vector<int> v(init, init + sizeof(init)/sizeof(init[0]));
+    std::vector<int> result = solution(v, 2);
+    ASSERT_EQ(result.size(), 4);
+    int expected_result_init[] = {3, 4, 1, 2};
+    std::vector<int> expected_result(expected_result_init, expected_result_init + sizeof(init)/sizeof(init[0]));
+    for (int i=0; i<4; ++i) {
+        EXPECT_EQ(result[i], expected_result[i]);
+    }
+}
