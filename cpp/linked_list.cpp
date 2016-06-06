@@ -8,15 +8,17 @@ li::li(std::string val, li *next) :
     value(val), next(next)
 {};
 
-void join(li *head, li *tail) {
-    head->next = tail;
-}
-
 li *make_list(std::vector<std::string> values) {
-    li *result = new li(values[0]);
-    if (values.size() > 1) {
-        li *new_node = new li(values[1]);
-        join(result, new_node);
+    li *end = new li(values.back());
+    if (values.size() == 1) {
+        return end;
     }
-    return result;
+    std::vector<std::string>::reverse_iterator rit = values.rbegin();
+    ++rit;
+    li *current_node = end;
+    for (; rit != values.rend(); ++rit) {
+        li *new_node = new li(*rit, current_node);
+        current_node = new_node;
+    }
+    return current_node;
 }

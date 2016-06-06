@@ -30,13 +30,15 @@ TEST(LinkedList, CreateManualList) {
     ASSERT_EQ(li0->next->next->value, "world");
 }
 
-TEST(LinkedList, CreateLlistWithFunction) {
-    const char *init[] = {"hello", "there", "world"};
+TEST(LinkedList, CreateListWithFunction) {
+    const char *init[] = {"hello", "there", "happy", "world"};
     std::vector<std::string> v(init, init + sizeof(init)/sizeof(init[0]));
     li *result = make_list(v);
     ASSERT_EQ(result->value, "hello");
     ASSERT_TRUE(result->next != NULL);
     ASSERT_EQ(result->next->value, "there");
     ASSERT_TRUE(result->next->next != NULL);
-    ASSERT_EQ(result->next->next->value, "world");
+    ASSERT_EQ(result->next->next->value, "happy");
+    ASSERT_TRUE(result->next->next->next != NULL);
+    ASSERT_EQ(result->next->next->next->value, "world");
 }
