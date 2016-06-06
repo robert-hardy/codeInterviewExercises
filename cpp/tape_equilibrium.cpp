@@ -4,11 +4,12 @@ namespace TapeEquilibrium {
 
 int solution(std::vector<int> &A) {
     std::vector<int>::iterator i = A.begin();
-    int sum_left, sum_right;
+    int sum_left;
+    int sum_right;
     for (; i < A.end(); i++) {
         sum_left = sum_to(A, i);
         sum_right = sum_from(A, i);
-        if (sum_left == sum_left) {
+        if (sum_left == sum_right) {
             return std::distance(A.begin(), i);
         }
     }
