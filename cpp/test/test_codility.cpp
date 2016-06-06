@@ -43,6 +43,16 @@ TEST(Codility1, CheckSliceCounterReturns3) {
     ASSERT_EQ(result, 3);
 }
 
+TEST(Codility1, CheckSolutionFunctionReturns3) {
+    using namespace Codility1;
+    int init[] = {2, 3, 4, 2, 1};
+    std::vector<int> A(init, init+sizeof(init)/sizeof(init[0]));
+    int result = solution(A);
+    ASSERT_EQ(result, 3);
+}
+
+
+
 TEST(Codility2, GettingStarted) {
     using namespace Codility2;
     int result = solution(1);

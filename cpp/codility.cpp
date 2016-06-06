@@ -5,7 +5,7 @@
 namespace Codility1 {
 
 int solution(std::vector<int> &A) {
-    return 1;
+    return count_size(A, A.begin());
 }
 
 int count_size(std::vector<int> &A, std::vector<int>::iterator i) {
