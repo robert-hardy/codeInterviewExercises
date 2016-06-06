@@ -6,11 +6,17 @@ namespace Codility1 {
 
 int solution(std::vector<int> &A) {
     std::vector<int>::iterator i = A.begin();
-    int max_length = 1;
+    int max_slice_length_so_far = 1;
+    int at = 0;
+    int slice_length;
     for(; i < A.end(); i++) {
-        max_length = std::max(max_length, count_size(A, i));
+        slice_length = count_size(A, i);
+        if (slice_length > max_slice_length_so_far) {
+            max_slice_length_so_far = slice_length;
+            at = std::distance(A.begin(), i);
+        }
     }
-    return max_length;
+    return at;
 }
 
 int count_size(std::vector<int> &A, std::vector<int>::iterator i) {
