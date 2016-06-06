@@ -8,8 +8,6 @@ TEST(Codility1, CheckInitialization) {
     std::vector<int> A(init, init+sizeof(init)/sizeof(init[0]));
     EXPECT_EQ(A.size(), 10);
     EXPECT_EQ(A.front(), 2);
-    int result = solution(A);
-    ASSERT_EQ(result, 1);
 }
 
 TEST(Codility1, CheckSliceCounterReturns1) {
