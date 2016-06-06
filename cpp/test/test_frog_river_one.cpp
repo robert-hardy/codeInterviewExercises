@@ -19,3 +19,9 @@ TEST(FrogRiverOne, TestRiverWide2) {
     int result = solution(2, A, 8);
     ASSERT_EQ(result, 4);
 }
+
+TEST(FrogRiverOne, GeneralCase) {
+    int A[] = {4, 3, 5, 4, 2, 1, 5, 4};
+    int result = solution(3, A, 8);
+    ASSERT_EQ(result, 5);
+}
