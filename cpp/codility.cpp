@@ -5,7 +5,12 @@
 namespace Codility1 {
 
 int solution(std::vector<int> &A) {
-    return count_size(A, A.begin());
+    std::vector<int>::iterator i = A.begin();
+    int max_length = 1;
+    for(; i < A.end(); i++) {
+        max_length = std::max(max_length, count_size(A, i));
+    }
+    return max_length;
 }
 
 int count_size(std::vector<int> &A, std::vector<int>::iterator i) {

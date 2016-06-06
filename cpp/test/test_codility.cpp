@@ -43,10 +43,16 @@ TEST(Codility1, CheckSliceCounterReturns3) {
     ASSERT_EQ(result, 3);
 }
 
-TEST(Codility1, CheckSolutionFunctionReturns3) {
+TEST(Codility1, CheckFindsSliceOfLength2) {
     using namespace Codility1;
     int init[] = {2, 2, 2, 2, 1, 2, -1, 2, 1, 3};
     std::vector<int> A(init, init+sizeof(init)/sizeof(init[0]));
+
+    std::vector<int>::iterator i = A.begin();
+    i = i + 4;
+    ASSERT_EQ(*i, 1);
+    int slice_length = count_size(A, i);
+    ASSERT_EQ(slice_length, 2);
     int result = solution(A);
     ASSERT_EQ(result, 4);
 }
