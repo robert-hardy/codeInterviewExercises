@@ -51,3 +51,15 @@ TEST(Codility3, TestCountHelper) {
     path_count_helper(foo, result);
     ASSERT_EQ(result, 1);
 }
+
+TEST(Codility3, CountVisiblePaths) {
+    using namespace Codility3;
+    tree *foo = new tree(10);
+    add_left(foo, 13);
+    add_right(foo, 9);
+    ASSERT_EQ(foo->x, 10);
+    ASSERT_EQ(foo->l->x, 13);
+    ASSERT_EQ(foo->r->x, 9);
+    int result = solution(foo);
+    ASSERT_EQ(result, 1);
+}
