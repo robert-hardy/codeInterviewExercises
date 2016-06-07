@@ -79,7 +79,8 @@ namespace CodeReview
     {
         static public void Main ()
         {
-            Console.WriteLine ("Hello World!");
+            SimpleFeed foo = new SimpleFeed();
+            Console.WriteLine (foo.Stock);
         }
     }
 
