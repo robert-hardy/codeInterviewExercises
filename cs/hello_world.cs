@@ -54,6 +54,27 @@ namespace CodeReview
         }
     }
 
+    public class SimpleFeed : IMarketDataFeed
+    {
+        public string Stock
+        {
+            get
+            {
+                return "Apple";
+            }
+        }
+
+        public event Action<MarketTick> Tick
+        {
+            add
+            {
+            }
+            remove
+            {
+            }
+        }
+    }
+
     public class HelloWorld
     {
         static public void Main ()
