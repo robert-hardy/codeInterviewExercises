@@ -3,10 +3,10 @@ using System;
 namespace wildert
 {
 
-    public delegate void TickHandler(EventArgs e);
+    // From https://msdn.microsoft.com/en-us/library/ak9w5846.aspx
     public interface ITickingThing
     {
-        event TickHandler Tick;
+        event EventHandler Tick;
     }
 
     public class Metronome
