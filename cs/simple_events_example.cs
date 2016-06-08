@@ -2,6 +2,13 @@
 using System;
 namespace wildert
 {
+
+    public delegate void TickHandler(EventArgs e);
+    public interface ITickingThing
+    {
+        event TickHandler Tick;
+    }
+
     public class Metronome
     {
         public event TickHandler Tick;
