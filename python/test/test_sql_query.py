@@ -13,7 +13,7 @@ class TestDBInitialize(unittest.TestCase):
         result = cur.fetchall()
         table_names = set([ r['name'] for r in result ])
         self.assertEqual(table_names,
-            set(['product', 'orders'])
+            set(['product', 'client_order'])
         )
 
     def test_product_table(self):
@@ -36,4 +36,16 @@ class TestDBInitialize(unittest.TestCase):
                 date(2014, 6, 1),
                 date(2015, 6, 1)
             ])
+        )
+
+    def test_order_table(self):
+        conn = initialize_db(':memory:')
+        cur = conn.cursor()
+        cur.execute("""
+            SELECT * FROM client_order;
+        """)
+        result = cur.fetchall()
+        quantity = set([ r['quantity'] for r in result ])
+        self.assertEqual(quantity,
+            set([1, 1, 10, 11, 11])
         )
