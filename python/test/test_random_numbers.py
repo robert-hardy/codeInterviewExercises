@@ -51,18 +51,25 @@ class TestHelperFunctions(unittest.TestCase):
         self.assertEqual(result, [])
 
 class TestInverseDistributionFunction(unittest.TestCase):
-    def test_create_inv_dist_func(self):
-        func = make_inv_dist_func(
+    def setUp(self):
+        self.func = make_inv_dist_func(
             random_nums=[1, 2, 3],
             probabilities=[0.1, 0.5, 0.4]
         )
-        self.assertEqual(func(0.09), 1)
-        self.assertEqual(func(0.1), 1)
-        self.assertEqual(func(0.11), 2)
-        self.assertEqual(func(0.59), 2)
-        self.assertEqual(func(0.60), 2)
-        self.assertEqual(func(0.65), 3)
 
+    def test_create_inv_dist_func(self):
+        self.assertEqual(self.func(0.09), 1)
+        self.assertEqual(self.func(0.1), 1)
+        self.assertEqual(self.func(0.11), 2)
+        self.assertEqual(self.func(0.59), 2)
+        self.assertEqual(self.func(0.60), 2)
+        self.assertEqual(self.func(0.65), 3)
+
+    def test_value_at_zero_and_at_one(self):
+        self.assertEqual(self.func(0), 1)
+        self.assertEqual(self.func(1), 3)
+
+class TestFixedOrFloatingPoint(unittest.TestCase):
     def test_compare_fixed_vs_floating_point(self):
         func_fixed_point = make_inv_dist_func(
             random_nums=[1, 2, 3],
