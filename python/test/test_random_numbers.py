@@ -25,6 +25,7 @@ class TestLeftCtsStepFunction(unittest.TestCase):
     def test_rightmost(self):
         self.assertEqual(self.func(95), 'A')
 
+
 class TestHelperFunctions(unittest.TestCase):
     def test_cumul_sum(self):
         result = list(cumulative_sum([0, 1, 2, 3]))
@@ -33,6 +34,7 @@ class TestHelperFunctions(unittest.TestCase):
     def test_cumul_sum_empty_list(self):
         result = list(cumulative_sum([]))
         self.assertEqual(result, [])
+
 
 class TestInverseDistributionFunction(unittest.TestCase):
     def setUp(self):
@@ -53,6 +55,7 @@ class TestInverseDistributionFunction(unittest.TestCase):
         self.assertEqual(self.func(0), 1)
         self.assertEqual(self.func(1), 3)
 
+
 class TestFixedOrFloatingPoint(unittest.TestCase):
     def test_compare_fixed_vs_floating_point(self):
         func_fixed_point = make_inv_dist_func(
@@ -66,22 +69,23 @@ class TestFixedOrFloatingPoint(unittest.TestCase):
         # Both agree exactly at the point
         self.assertEqual(func_fixed_point(Decimal('0.1')), 1)
         self.assertEqual(func_float_point(         0.1),   1)
-        # Just the the right we get an incorrect value if we use floats ...
+        # Just to the right we can get an incorrect value if we use floats ...
         self.assertEqual(func_fixed_point(Decimal('0.1000000000000000001')), 2)
         self.assertEqual(func_float_point(         0.1000000000000000001),   1)
         self.assertEqual(func_fixed_point(Decimal('0.100000000000000001')), 2)
         self.assertEqual(func_float_point(         0.100000000000000001),   1)
         self.assertEqual(func_fixed_point(Decimal('0.10000000000000001')), 2)
         self.assertEqual(func_float_point(         0.10000000000000001),   1)
-        # ... until we get far enough away
+        # ... until we are far enough away
         self.assertEqual(func_fixed_point(Decimal('0.1000000000000001')), 2)
         self.assertEqual(func_float_point(         0.1000000000000001),   2)
+
 
 class TestGenerator(unittest.TestCase):
     def test_generator(self):
         gen = make_generator(
-            random_nums=[1, 2, 3],
-            probabilities=[Decimal('0.1'), Decimal('0.5'), Decimal('0.4')]
+            random_nums=range(10),
+            probabilities=[Decimal('0.1')] * 10
         )
-        result = [ gen() for i in range(100) ]
-        self.assertEqual(set(result), {1, 2, 3})
+        result = [ gen() for i in range(1000) ]
+        self.assertEqual(set(result), set(range(10)))
