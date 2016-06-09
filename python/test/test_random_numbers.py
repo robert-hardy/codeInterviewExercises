@@ -1,5 +1,7 @@
 import unittest
 
+from decimal import Decimal
+
 from random_numbers import (
     make_right_cts_step_function,
     make_left_cts_step_function,
@@ -52,22 +54,22 @@ class TestInverseDistributionFunction(unittest.TestCase):
     def test_create_inv_dist_func(self):
         func = make_inv_dist_func(
             random_nums=[1, 2, 3],
-            probabilities=[0.1, 0.5, 0.4]
+            probabilities=[Decimal("0.1"), Decimal("0.5"), Decimal("0.4")]
         )
-        self.assertEqual(func(0.09), 1)
-        self.assertEqual(func(0.1), 1)
-        self.assertEqual(func(0.11), 2)
-        self.assertEqual(func(0.59), 2)
-        self.assertEqual(func(0.60), 2)
-        self.assertEqual(func(0.65), 3)
+        self.assertEqual(func(Decimal('0.09')), 1)
+        self.assertEqual(func(Decimal('0.1')), 1)
+        self.assertEqual(func(Decimal('0.11')), 2)
+        self.assertEqual(func(Decimal('0.59')), 2)
+        self.assertEqual(func(Decimal('0.60')), 2)
+        self.assertEqual(func(Decimal('0.65')), 3)
 
     def test_create_inv_dist_func_check_precision(self):
         func = make_inv_dist_func(
             random_nums=[1, 2, 3],
-            probabilities=[0.1, 0.5, 0.4]
+            probabilities=[Decimal('0.1'), Decimal('0.5'), Decimal('0.4')]
         )
-        self.assertEqual(func(0.1), 1)
-        self.assertEqual(func(0.1000000000000000001), 1)
-        self.assertEqual(func(0.100000000000000001), 1)
-        self.assertEqual(func(0.10000000000000001), 1)
-        self.assertEqual(func(0.1000000000000001), 2)
+        self.assertEqual(func(Decimal('0.1')), 1)
+        self.assertEqual(func(Decimal('0.1000000000000000001')), 2)
+        self.assertEqual(func(Decimal('0.100000000000000001')), 2)
+        self.assertEqual(func(Decimal('0.10000000000000001')), 2)
+        self.assertEqual(func(Decimal('0.1000000000000001')), 2)
