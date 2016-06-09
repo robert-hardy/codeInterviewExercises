@@ -25,3 +25,12 @@ def make_generator(random_nums, probabilities):
     def gen():
         return inv_dist_func(random())
     return gen
+
+class RandomGen(object):
+    def __init__(self, random_nums, probabilities):
+        self.random_nums = random_nums
+        self.probabilities = probabilities
+        self.generator = make_generator(random_nums, probabilities)
+
+    def next_num(self):
+        return self.generator()

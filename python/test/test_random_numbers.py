@@ -8,7 +8,8 @@ from random_numbers import (
     make_left_cts_step_function,
     make_inv_dist_func,
     cumulative_sum,
-    make_generator
+    make_generator,
+    RandomGen
 )
 
 class TestStepFunctionFactory(unittest.TestCase):
@@ -148,6 +149,29 @@ class TestGenerator(unittest.TestCase):
         self.assertEqual(count, [(-1, 15), (0, 288), (1, 583), (2, 109), (3, 5)])
         seed(1)
         result = [ gen() for i in range(1000) ]
+        count = sorted([ (k, v) for (k, v) in Counter(result).iteritems() ],
+                key=lambda x: x[0])
+        self.assertEqual(count, [(-1, 10), (0, 282), (1, 591), (2, 109), (3, 8)])
+
+class TestRandomGenObject(unittest.TestCase):
+    def test_given_example(self):
+        gen = RandomGen(
+            random_nums=[-1, 0, 1, 2, 3],
+            probabilities=[
+                Decimal('0.01'),
+                Decimal('0.3'),
+                Decimal('0.58'),
+                Decimal('0.1'),
+                Decimal('0.01')
+            ]
+        )
+        seed(0)
+        result = [ gen.next_num() for i in range(1000) ]
+        count = sorted([ (k, v) for (k, v) in Counter(result).iteritems() ],
+                key=lambda x: x[0])
+        self.assertEqual(count, [(-1, 15), (0, 288), (1, 583), (2, 109), (3, 5)])
+        seed(1)
+        result = [ gen.next_num() for i in range(1000) ]
         count = sorted([ (k, v) for (k, v) in Counter(result).iteritems() ],
                 key=lambda x: x[0])
         self.assertEqual(count, [(-1, 10), (0, 282), (1, 591), (2, 109), (3, 8)])
