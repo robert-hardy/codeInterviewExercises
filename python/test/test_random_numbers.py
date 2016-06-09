@@ -14,21 +14,21 @@ class TestInverseDistributionFunctionFactory(unittest.TestCase):
     def setUp(self):
         self.func = make_inv_dist_func(
             random_nums=[1, 2, 3],
-            probabilities=[0.1, 0.5, 0.4]
+            probabilities=[0.2, 0.5, 0.3]
         )
 
     def test_create_inv_dist_func(self):
-        self.assertEqual(self.func(0.09), 1)
-        self.assertEqual(self.func(0.1), 1)
-        self.assertEqual(self.func(0.11), 2)
-        self.assertEqual(self.func(0.59), 2)
-        self.assertEqual(self.func(0.60), 2)
-        self.assertEqual(self.func(0.65), 3)
+        self.assertEqual(self.func(0),    1)
+        self.assertEqual(self.func(0.19), 1)
+        self.assertEqual(self.func(0.2),  1)
+        self.assertEqual(self.func(0.21),  2)
+        self.assertEqual(self.func(0.69),  2)
+        self.assertEqual(self.func(0.70),  2)
+        self.assertEqual(self.func(0.71),   3)
+        self.assertEqual(self.func(1),      3)
 
-    def test_value_at_zero_and_at_one(self):
-        self.assertEqual(self.func(0), 1)
-        self.assertEqual(self.func(1), 3)
 
+class TestErrorHandling(unittest.TestCase):
     def test_throws_error_when_misspecified(self):
         with self.assertRaises(ValueError) as context:
             func = make_inv_dist_func(
@@ -52,10 +52,11 @@ class TestFixedVsFloatingPoint(unittest.TestCase):
             random_nums=[1, 2, 3],
             probabilities=[0.1, 0.5, 0.4]
         )
-        # Both agree exactly at the point
+        # Both agree exactly at the step point
         self.assertEqual(func_fixed_point(Decimal('0.1')), 1)
         self.assertEqual(func_float_point(         0.1),   1)
-        # Just to the right we can get an incorrect value if we use floats ...
+        # Just to the right we can get an incorrect value if we use floats but
+        # okay with Decimal ...
         self.assertEqual(func_fixed_point(Decimal('0.1000000000000000001')), 2)
         self.assertEqual(func_float_point(         0.1000000000000000001),   1)
         self.assertEqual(func_fixed_point(Decimal('0.100000000000000001')), 2)
@@ -102,27 +103,6 @@ class TestGenerator(unittest.TestCase):
         count = [ (k, v) for (k, v) in Counter(result).iteritems() ]
         self.assertEqual(count, [ ('H', 95), ('T', 905) ])
 
-    def test_given_example(self):
-        gen = make_generator(
-            random_nums=[-1, 0, 1, 2, 3],
-            probabilities=[
-                Decimal('0.01'),
-                Decimal('0.3'),
-                Decimal('0.58'),
-                Decimal('0.1'),
-                Decimal('0.01')
-            ]
-        )
-        seed(0)
-        result = [ gen() for i in range(1000) ]
-        count = sorted([ (k, v) for (k, v) in Counter(result).iteritems() ],
-                key=lambda x: x[0])
-        self.assertEqual(count, [(-1, 15), (0, 288), (1, 583), (2, 109), (3, 5)])
-        seed(1)
-        result = [ gen() for i in range(1000) ]
-        count = sorted([ (k, v) for (k, v) in Counter(result).iteritems() ],
-                key=lambda x: x[0])
-        self.assertEqual(count, [(-1, 10), (0, 282), (1, 591), (2, 109), (3, 8)])
 
 class TestRandomGenObject(unittest.TestCase):
     def test_given_example(self):
