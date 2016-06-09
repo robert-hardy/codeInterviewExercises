@@ -60,3 +60,14 @@ class TestInverseDistributionFunction(unittest.TestCase):
         self.assertEqual(func(0.59), 2)
         self.assertEqual(func(0.60), 2)
         self.assertEqual(func(0.65), 3)
+
+    def test_create_inv_dist_func_check_precision(self):
+        func = make_inv_dist_func(
+            random_nums=[1, 2, 3],
+            probabilities=[0.1, 0.5, 0.4]
+        )
+        self.assertEqual(func(0.1), 1)
+        self.assertEqual(func(0.1000000000000000001), 1)
+        self.assertEqual(func(0.100000000000000001), 1)
+        self.assertEqual(func(0.10000000000000001), 1)
+        self.assertEqual(func(0.1000000000000001), 2)
