@@ -7,7 +7,7 @@ from random_numbers import collect_many_random_integers
 
 class Test(unittest.TestCase):
     def test_big_random_integers(self):
-        self.assertFalse(isnan(randint(0, 10 ** 10)))
+        self.assertFalse(isnan(randint(0, 10 ** 100)))
 
     def test_basic_randint(self):
         result = collect_many_random_integers()
