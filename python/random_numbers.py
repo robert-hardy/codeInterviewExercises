@@ -1,4 +1,5 @@
-from random import randint
+from bisect import bisect
 
-def collect_many_random_integers():
-    return set([randint(0,9) for x in range(200)])
+def grade(score, breakpoints=[60, 70, 80, 90], grades='FDCBA'):
+    i = bisect(breakpoints, score)
+    return grades[i]
