@@ -22,6 +22,26 @@ def create_tables(conn):
             FOREIGN KEY (product_id) REFERENCES product(product_id)
         );
     """)
+    conn.commit()
+
+def populate_tables(conn):
+    rows = [
+        (101, "book1", 91, "2016-06-01"),
+        (102, "book2", 92, "2017-06-01"),
+        (103, "book3", 93, "2016-03-01"),
+        (104, "book4", 94, "2014-06-01"),
+        (105, "book5", 95, "2015-06-01"),
+    ]
+    cur = conn.cursor()
+    query = """
+        INSERT OR IGNORE INTO product
+        VALUES (?, ?, ?, ?)
+    """
+    try:
+        cur.executemany(query, rows)
+        conn.commit()
+    except:
+        raise
 
 def dict_factory(cur, row):
     d = {}
@@ -33,4 +53,5 @@ def initialize_db(filename):
     conn = sqlite.connect(filename, detect_types=sqlite.PARSE_DECLTYPES)
     conn.row_factory = dict_factory
     create_tables(conn)
+    populate_tables(conn)
     return conn

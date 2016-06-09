@@ -14,3 +14,15 @@ class TestDBInitialize(unittest.TestCase):
         self.assertEqual(table_names,
             set(['product', 'orders'])
         )
+
+    def test_product_table(self):
+        conn = initialize_db(':memory:')
+        cur = conn.cursor()
+        cur.execute("""
+            SELECT * FROM product;
+        """)
+        result = cur.fetchall()
+        product_names = set([ r['name'] for r in result ])
+        self.assertEqual(product_names,
+            set(['book1', 'book2', 'book3', 'book4', 'book5'])
+        )
