@@ -54,22 +54,34 @@ class TestInverseDistributionFunction(unittest.TestCase):
     def test_create_inv_dist_func(self):
         func = make_inv_dist_func(
             random_nums=[1, 2, 3],
-            probabilities=[Decimal("0.1"), Decimal("0.5"), Decimal("0.4")]
+            probabilities=[0.1, 0.5, 0.4]
         )
-        self.assertEqual(func(Decimal('0.09')), 1)
-        self.assertEqual(func(Decimal('0.1')), 1)
-        self.assertEqual(func(Decimal('0.11')), 2)
-        self.assertEqual(func(Decimal('0.59')), 2)
-        self.assertEqual(func(Decimal('0.60')), 2)
-        self.assertEqual(func(Decimal('0.65')), 3)
+        self.assertEqual(func(0.09), 1)
+        self.assertEqual(func(0.1), 1)
+        self.assertEqual(func(0.11), 2)
+        self.assertEqual(func(0.59), 2)
+        self.assertEqual(func(0.60), 2)
+        self.assertEqual(func(0.65), 3)
 
-    def test_create_inv_dist_func_check_precision(self):
-        func = make_inv_dist_func(
+    def test_compare_fixed_vs_floating_point(self):
+        func_fixed_point = make_inv_dist_func(
             random_nums=[1, 2, 3],
             probabilities=[Decimal('0.1'), Decimal('0.5'), Decimal('0.4')]
         )
-        self.assertEqual(func(Decimal('0.1')), 1)
-        self.assertEqual(func(Decimal('0.1000000000000000001')), 2)
-        self.assertEqual(func(Decimal('0.100000000000000001')), 2)
-        self.assertEqual(func(Decimal('0.10000000000000001')), 2)
-        self.assertEqual(func(Decimal('0.1000000000000001')), 2)
+        func_float_point = make_inv_dist_func(
+            random_nums=[1, 2, 3],
+            probabilities=[0.1, 0.5, 0.4]
+        )
+        # Both agree exactly at the point
+        self.assertEqual(func_fixed_point(Decimal('0.1')), 1)
+        self.assertEqual(func_float_point(         0.1),   1)
+        # Just the the right we get an incorrect value if we use floats ...
+        self.assertEqual(func_fixed_point(Decimal('0.1000000000000000001')), 2)
+        self.assertEqual(func_float_point(         0.1000000000000000001),   1)
+        self.assertEqual(func_fixed_point(Decimal('0.100000000000000001')), 2)
+        self.assertEqual(func_float_point(         0.100000000000000001),   1)
+        self.assertEqual(func_fixed_point(Decimal('0.10000000000000001')), 2)
+        self.assertEqual(func_float_point(         0.10000000000000001),   1)
+        # ... until we get far enough away
+        self.assertEqual(func_fixed_point(Decimal('0.1000000000000001')), 2)
+        self.assertEqual(func_float_point(         0.1000000000000001),   2)
