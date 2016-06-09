@@ -84,7 +84,7 @@ class TestFixedOrFloatingPoint(unittest.TestCase):
 
 
 class TestGenerator(unittest.TestCase):
-    def test_generator(self):
+    def test_uniform_probabilities(self):
         gen = make_generator(
             random_nums=range(10),
             probabilities=[Decimal('0.1')] * 10
@@ -103,3 +103,17 @@ class TestGenerator(unittest.TestCase):
             (0, 95), (1, 85), (2, 100), (3, 102), (4, 91),
             (5, 114), (6, 87), (7, 108), (8, 115), (9, 103)
         ])
+
+    def test_ten_percent_heads(self):
+        gen = make_generator(
+            random_nums=['H', 'T'],
+            probabilities=[Decimal('0.1'), Decimal('0.9')]
+        )
+        seed(0)
+        result = [ gen() for i in range(1000) ]
+        count = [ (k, v) for (k, v) in Counter(result).iteritems() ]
+        self.assertEqual(count, [ ('H', 114), ('T', 886) ])
+        seed(1)
+        result = [ gen() for i in range(1000) ]
+        count = [ (k, v) for (k, v) in Counter(result).iteritems() ]
+        self.assertEqual(count, [ ('H', 95), ('T', 905) ])
