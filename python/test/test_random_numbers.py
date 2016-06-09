@@ -21,7 +21,7 @@ class TestRightCtsStepFunction(unittest.TestCase):
     def test_rightmost(self):
         self.assertEqual(self.func(95), 'A')
 
-class TestLefCtsStepFunction(unittest.TestCase):
+class TestLeftCtsStepFunction(unittest.TestCase):
     def setUp(self):
         self.func = make_left_cts_step_function(
             step_points=[60, 70, 80, 90],
