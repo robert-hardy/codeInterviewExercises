@@ -5,7 +5,8 @@ from decimal import Decimal
 from random_numbers import (
     make_left_cts_step_function,
     make_inv_dist_func,
-    cumulative_sum
+    cumulative_sum,
+    make_generator
 )
 
 class TestLeftCtsStepFunction(unittest.TestCase):
@@ -75,3 +76,12 @@ class TestFixedOrFloatingPoint(unittest.TestCase):
         # ... until we get far enough away
         self.assertEqual(func_fixed_point(Decimal('0.1000000000000001')), 2)
         self.assertEqual(func_float_point(         0.1000000000000001),   2)
+
+class TestGenerator(unittest.TestCase):
+    def test_generator(self):
+        gen = make_generator(
+            random_nums=[1, 2, 3],
+            probabilities=[Decimal('0.1'), Decimal('0.5'), Decimal('0.4')]
+        )
+        result = [ gen() for i in range(100) ]
+        self.assertEqual(set(result), {1, 2, 3})
