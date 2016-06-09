@@ -15,6 +15,8 @@ def cumulative_sum(lst):
 
 def make_inv_dist_func(random_nums, probabilities):
     cumulative_probabilities = list(cumulative_sum(probabilities))
+    if cumulative_probabilities[-1] != 1:
+        raise ValueError('Probabilities do not add to 1')
     return make_left_cts_step_function(cumulative_probabilities,
             random_nums)
 

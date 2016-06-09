@@ -58,7 +58,16 @@ class TestInverseDistributionFunctionFactory(unittest.TestCase):
         self.assertEqual(self.func(1), 3)
 
     def test_throws_error_when_misspecified(self):
-        pass
+        with self.assertRaises(ValueError) as context:
+            func = make_inv_dist_func(
+                random_nums=[1, 2],
+                probabilities=[0.1, 0.5]
+            )
+        with self.assertRaises(ValueError) as context:
+            func = make_inv_dist_func(
+                random_nums=[1, 2],
+                probabilities=[Decimal('0.1'), Decimal('0.5')]
+            )
 
 
 class TestFixedVsFloatingPoint(unittest.TestCase):
