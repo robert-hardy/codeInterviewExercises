@@ -5,39 +5,10 @@ from decimal import Decimal
 from random import seed
 
 from random_numbers import (
-    make_left_cts_step_function,
     make_inv_dist_func,
-    cumulative_sum,
     make_generator,
     RandomGen
 )
-
-class TestStepFunctionFactory(unittest.TestCase):
-    def setUp(self):
-        self.func = make_left_cts_step_function(
-            step_points=[60, 70, 80, 90],
-            plateaus='FDCBA'
-        )
-
-    def test_leftmost(self):
-        self.assertEqual(self.func(30), 'F')
-
-    def test_intermediate(self):
-        self.assertEqual(self.func(60), 'F')
-
-    def test_rightmost(self):
-        self.assertEqual(self.func(95), 'A')
-
-
-class TestHelperFunctions(unittest.TestCase):
-    def test_cumul_sum(self):
-        result = list(cumulative_sum([0, 1, 2, 3]))
-        self.assertEqual(result, [0, 1, 3, 6])
-
-    def test_cumul_sum_empty_list(self):
-        result = list(cumulative_sum([]))
-        self.assertEqual(result, [])
-
 
 class TestInverseDistributionFunctionFactory(unittest.TestCase):
     def setUp(self):

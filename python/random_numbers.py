@@ -1,4 +1,4 @@
-from bisect import bisect_left, bisect_right
+from bisect import bisect_left
 from random import random
 
 def make_left_cts_step_function(step_points, plateaus):
@@ -17,8 +17,10 @@ def make_inv_dist_func(random_nums, probabilities):
     cumulative_probabilities = list(cumulative_sum(probabilities))
     if cumulative_probabilities[-1] != 1:
         raise ValueError('Probabilities do not sum to 1')
-    return make_left_cts_step_function(cumulative_probabilities,
-            random_nums)
+    return make_left_cts_step_function(
+            cumulative_probabilities,
+            random_nums
+    )
 
 def make_generator(random_nums, probabilities):
     inv_dist_func = make_inv_dist_func(random_nums, probabilities)
