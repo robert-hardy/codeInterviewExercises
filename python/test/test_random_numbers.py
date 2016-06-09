@@ -11,7 +11,7 @@ from random_numbers import (
     make_generator
 )
 
-class TestLeftCtsStepFunction(unittest.TestCase):
+class TestStepFunctionFactory(unittest.TestCase):
     def setUp(self):
         self.func = make_left_cts_step_function(
             step_points=[60, 70, 80, 90],
@@ -38,7 +38,7 @@ class TestHelperFunctions(unittest.TestCase):
         self.assertEqual(result, [])
 
 
-class TestInverseDistributionFunction(unittest.TestCase):
+class TestInverseDistributionFunctionFactory(unittest.TestCase):
     def setUp(self):
         self.func = make_inv_dist_func(
             random_nums=[1, 2, 3],
@@ -57,8 +57,11 @@ class TestInverseDistributionFunction(unittest.TestCase):
         self.assertEqual(self.func(0), 1)
         self.assertEqual(self.func(1), 3)
 
+    def test_throws_error_when_misspecified(self):
+        pass
 
-class TestFixedOrFloatingPoint(unittest.TestCase):
+
+class TestFixedVsFloatingPoint(unittest.TestCase):
     def test_compare_fixed_vs_floating_point(self):
         func_fixed_point = make_inv_dist_func(
             random_nums=[1, 2, 3],
@@ -117,3 +120,25 @@ class TestGenerator(unittest.TestCase):
         result = [ gen() for i in range(1000) ]
         count = [ (k, v) for (k, v) in Counter(result).iteritems() ]
         self.assertEqual(count, [ ('H', 95), ('T', 905) ])
+
+    def test_given_example(self):
+        gen = make_generator(
+            random_nums=[-1, 0, 1, 2, 3],
+            probabilities=[
+                Decimal('0.01'),
+                Decimal('0.3'),
+                Decimal('0.58'),
+                Decimal('0.1'),
+                Decimal('0.01')
+            ]
+        )
+        seed(0)
+        result = [ gen() for i in range(1000) ]
+        count = sorted([ (k, v) for (k, v) in Counter(result).iteritems() ],
+                key=lambda x: x[0])
+        self.assertEqual(count, [(-1, 15), (0, 288), (1, 583), (2, 109), (3, 5)])
+        seed(1)
+        result = [ gen() for i in range(1000) ]
+        count = sorted([ (k, v) for (k, v) in Counter(result).iteritems() ],
+                key=lambda x: x[0])
+        self.assertEqual(count, [(-1, 10), (0, 282), (1, 591), (2, 109), (3, 8)])
