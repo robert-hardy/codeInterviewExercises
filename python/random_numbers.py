@@ -10,3 +10,9 @@ def step_function(
     else:
         i = bisect_left(step_points, x)
     return plateaus[i]
+
+def make_right_cts_step_function( step_points, plateaus):
+    def right_cts_step_function(x):
+        i = bisect_right(step_points, x)
+        return plateaus[i]
+    return right_cts_step_function
