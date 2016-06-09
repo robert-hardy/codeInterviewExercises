@@ -1,8 +1,8 @@
 import unittest
 
-from random_numbers import grade
+from random_numbers import step_function
 
 class Test(unittest.TestCase):
     def test_grade(self):
-        self.assertEqual(grade(60), 'D')
-        self.assertEqual(grade(59.999), 'F')
+        self.assertEqual(step_function(60), 'D')
+        self.assertEqual(step_function(59.999), 'F')
