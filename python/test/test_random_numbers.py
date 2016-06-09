@@ -1,6 +1,8 @@
 import unittest
 
+from collections import Counter
 from decimal import Decimal
+from random import seed
 
 from random_numbers import (
     make_left_cts_step_function,
@@ -87,5 +89,17 @@ class TestGenerator(unittest.TestCase):
             random_nums=range(10),
             probabilities=[Decimal('0.1')] * 10
         )
+        seed(0)
         result = [ gen() for i in range(1000) ]
-        self.assertEqual(set(result), set(range(10)))
+        count = [ (k, v) for (k, v) in Counter(result).iteritems() ]
+        self.assertEqual(count, [
+            (0, 114), (1, 87), (2, 95), (3, 102), (4, 110),
+            (5, 89), (6, 109), (7, 104), (8, 86), (9, 104)
+        ])
+        seed(1)
+        result = [ gen() for i in range(1000) ]
+        count = [ (k, v) for (k, v) in Counter(result).iteritems() ]
+        self.assertEqual(count, [
+            (0, 95), (1, 85), (2, 100), (3, 102), (4, 91),
+            (5, 114), (6, 87), (7, 108), (8, 115), (9, 103)
+        ])
