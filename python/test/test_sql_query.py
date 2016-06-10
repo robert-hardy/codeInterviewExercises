@@ -64,8 +64,8 @@ class TestQuery(unittest.TestCase):
         full_populate_tables(conn)
         results = get_books_that_are_not_selling_well(conn, self.today)
         self.assertEqual(results, [
-            {'product_id': 103, 'total_sold_in_last_year': 1},
-            {'product_id': 105, 'total_sold_in_last_year': 0}
+            {'product_id': 103, 'order_size_in_last_year': 1},
+            {'product_id': 105, 'order_size_in_last_year': 0}
         ])
 
 
@@ -85,12 +85,12 @@ class TestLeftOuterJoinReturnsRowsForEachBook(unittest.TestCase):
                     ELSE
                         client_order.quantity
                 END
-                ) as total_sold_in_last_year
+                ) as order_size_in_last_year
             FROM
                 product LEFT OUTER JOIN client_order
                 ON product.product_id = client_order.product_id;
         """.format(now=self.today.isoformat()))
-        results = [ (r['name'], r['total_sold_in_last_year']) for r in cur.fetchall() ]
+        results = [ (r['name'], r['order_size_in_last_year']) for r in cur.fetchall() ]
         return results
 
     def setUp(self):
@@ -164,7 +164,7 @@ class TestAvailableByClause(unittest.TestCase):
                     ELSE
                         client_order.quantity
                 END
-                ) as total_sold_in_last_year,
+                ) as order_size_in_last_year,
                 available_from
             FROM
                 product LEFT OUTER JOIN client_order
@@ -172,7 +172,7 @@ class TestAvailableByClause(unittest.TestCase):
             WHERE
                 available_from < date('{now}', '-1 months');
         """.format(now=self.today.isoformat()))
-        results = [ (r['name'], r['total_sold_in_last_year']) for r in cur.fetchall() ]
+        results = [ (r['name'], r['order_size_in_last_year']) for r in cur.fetchall() ]
         return results
 
     def setUp(self):

@@ -74,7 +74,7 @@ def get_books_that_are_not_selling_well(conn, today_date=None):
     query = """
         SELECT
             product_id,
-            total_sold_in_last_year
+            order_size_in_last_year
         FROM (
             SELECT
                 product.product_id,
@@ -88,7 +88,7 @@ def get_books_that_are_not_selling_well(conn, today_date=None):
                     ELSE
                         client_order.quantity
                 END
-                ) as total_sold_in_last_year,
+                ) as order_size_in_last_year,
                 available_from
             FROM
                 product LEFT OUTER JOIN client_order
@@ -97,7 +97,7 @@ def get_books_that_are_not_selling_well(conn, today_date=None):
                 available_from < date('{now}', '-1 months')
             ) AS a
         WHERE
-            a.total_sold_in_last_year < 10
+            a.order_size_in_last_year < 10
     """.format(now=today_date.isoformat())
     cur.execute(query)
     return cur.fetchall()
