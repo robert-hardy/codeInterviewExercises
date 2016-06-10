@@ -88,8 +88,7 @@ def get_books_that_are_not_selling_well(conn, today_date=None):
                     ELSE
                         client_order.quantity
                 END
-                ) as order_size_in_last_year,
-                available_from
+                ) as order_size_in_last_year
             FROM
                 product LEFT OUTER JOIN client_order
                 ON product.product_id = client_order.product_id

@@ -164,8 +164,7 @@ class TestAvailableByClause(unittest.TestCase):
                     ELSE
                         client_order.quantity
                 END
-                ) as order_size_in_last_year,
-                available_from
+                ) as order_size_in_last_year
             FROM
                 product LEFT OUTER JOIN client_order
                 ON product.product_id = client_order.product_id
