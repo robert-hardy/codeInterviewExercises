@@ -73,6 +73,9 @@ class TestQuery(unittest.TestCase):
 
 
 class TestQueryBeforeGroupBy(unittest.TestCase):
+    # Checks that we can produce a list, for each not-new book
+    # of the sizes of orders in the last year.
+    # These results will be grouped in the main query.
     def execute_query(self):
         cur = self.conn.cursor()
         cur.execute("""
@@ -111,6 +114,7 @@ class TestQueryBeforeGroupBy(unittest.TestCase):
         self.today = date(2016, 6, 10)
 
     def test_no_orders_at_all(self):
+        # Basically gives us a list of the not-new books
         results = self.execute_query()
         self.assertEqual(results, [
             (u'book3', 0),
@@ -118,7 +122,7 @@ class TestQueryBeforeGroupBy(unittest.TestCase):
             (u'book5', 0)
         ])
 
-    def test_one_book_with_one_order(self):
+    def test_one_new_book_with_one_order(self):
         order_rows = [
             (1000, 101, 1,  91, "2016-04-01")
         ]
@@ -126,6 +130,18 @@ class TestQueryBeforeGroupBy(unittest.TestCase):
         results = self.execute_query()
         self.assertEqual(results, [
             (u'book3', 0),
+            (u'book4', 0),
+            (u'book5', 0)
+        ])
+
+    def test_one_not_new_book_with_one_order(self):
+        order_rows = [
+            (1000, 103, 1,  91, "2016-04-01")
+        ]
+        populate_order_table(self.conn, order_rows)
+        results = self.execute_query()
+        self.assertEqual(results, [
+            (u'book3', 1),
             (u'book4', 0),
             (u'book5', 0)
         ])
