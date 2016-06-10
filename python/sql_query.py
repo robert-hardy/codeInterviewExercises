@@ -76,8 +76,10 @@ def get_books_that_are_not_selling_well(conn, today_date=None):
         FROM
             client_order JOIN product
             ON client_order.product_id = product.product_id
-        WHERE available_from < date('{now}', '-1 months')
-        AND dispatch_date > date('{now}', '-1 years')
+        WHERE
+            dispatch_date > date('{now}', '-1 years')
+        AND
+            available_from < date('{now}', '-1 months')
         GROUP BY client_order.product_id
         HAVING SUM(quantity) < 10
     """.format(now=today_date.isoformat())
