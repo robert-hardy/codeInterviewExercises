@@ -43,6 +43,10 @@ class TestErrorHandling(unittest.TestCase):
 
 
 class TestFixedVsFloatingPoint(unittest.TestCase):
+    """
+        Floating-point numbers are problematic near the step points.
+        This test shows that fixed-point numbers are always correct.
+    """
     def test_compare_fixed_vs_floating_point(self):
         func_fixed_point = make_inv_dist_func(
             random_nums=[1, 2, 3],
@@ -70,6 +74,10 @@ class TestFixedVsFloatingPoint(unittest.TestCase):
 
 class TestGenerator(unittest.TestCase):
     def test_uniform_probabilities(self):
+        """
+            Reasonable confirmation that we can sample
+            from a uniform, discrete distribution.
+        """
         gen = make_generator(
             random_nums=range(10),
             probabilities=[Decimal('0.1')] * 10
@@ -90,6 +98,10 @@ class TestGenerator(unittest.TestCase):
         ])
 
     def test_ten_percent_heads(self):
+        """
+            Reasonable confirmation that we can simulate
+            a biased coin.
+        """
         gen = make_generator(
             random_nums=['H', 'T'],
             probabilities=[Decimal('0.1'), Decimal('0.9')]
@@ -105,6 +117,10 @@ class TestGenerator(unittest.TestCase):
 
 
 class TestRandomGenClass(unittest.TestCase):
+    """
+        Reasonable confirmation that we can sample
+        the disctribution used in the question.
+    """
     def test_given_example(self):
         gen = RandomGen(
             random_nums=[-1, 0, 1, 2, 3],
