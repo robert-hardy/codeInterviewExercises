@@ -164,7 +164,7 @@ class TestQueryBeforeGroupBy(unittest.TestCase):
             (u'book5', 0)
         ])
 
-    def test_with_book4_having_two_small_orders(self):
+    def test_using_orders_in_test_on_main_query(self):
         full_populate_tables(self.conn)
         results = self.execute_query()
         self.assertEqual(results, [
