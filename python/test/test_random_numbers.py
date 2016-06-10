@@ -104,7 +104,7 @@ class TestGenerator(unittest.TestCase):
         self.assertEqual(count, [ ('H', 95), ('T', 905) ])
 
 
-class TestRandomGenObject(unittest.TestCase):
+class TestRandomGenClass(unittest.TestCase):
     def test_given_example(self):
         gen = RandomGen(
             random_nums=[-1, 0, 1, 2, 3],
