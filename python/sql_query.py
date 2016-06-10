@@ -1,3 +1,4 @@
+from datetime import date
 import sqlite3 as sqlite
 
 def create_tables(conn):
@@ -65,16 +66,20 @@ def initialize_db(filename):
     create_tables(conn)
     return conn
 
-def get_books_that_are_not_selling_well(conn):
+
+def get_books_that_are_not_selling_well(conn, today_date=None):
     cur = conn.cursor()
-    cur.execute("""
+    if today_date is None:
+        today_date = date.today()
+    query = """
         SELECT client_order.product_id, SUM(quantity) as total_sold
         FROM
             client_order JOIN product
             ON client_order.product_id = product.product_id
-        WHERE julianday(date('now')) - julianday(available_from) > 30
-        AND julianday(date('now')) - julianday(dispatch_date) < 90
+        WHERE available_from < date('{now}', '-1 months')
+        AND dispatch_date > date('{now}', '-1 years')
         GROUP BY client_order.product_id
         HAVING SUM(quantity) < 10
-    """)
+    """.format(now=today_date.isoformat())
+    cur.execute(query)
     return cur.fetchall()
