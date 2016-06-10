@@ -73,12 +73,12 @@ def get_books_that_are_not_selling_well(conn, today_date=None):
         today_date = date.today()
     query = """
         SELECT
-            a.product_id as product_id,
-            a.total_sold_in_last_year as total_sold_in_last_year
+            a.product_id,
+            a.total_sold_in_last_year,
+            a.available_from
         FROM (
             SELECT
                 product.product_id,
-                available_from as release_date,
                 SUM (
                     CASE
                         WHEN
@@ -90,15 +90,14 @@ def get_books_that_are_not_selling_well(conn, today_date=None):
                         ELSE
                             client_order.quantity
                     END
-                ) as total_sold_in_last_year
+                ) as total_sold_in_last_year,
+                product.available_from
             FROM
                 product LEFT OUTER JOIN client_order
                 ON product.product_id = client_order.product_id
-            WHERE
-                available_from < date('{now}', '-1 months')
-            GROUP BY client_order.product_id
-        ) a
+            ) AS a
         WHERE
+            a.available_from < date('{now}', '-1 months') AND
             a.total_sold_in_last_year < 10
     """.format(now=today_date.isoformat())
     cur.execute(query)

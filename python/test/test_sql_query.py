@@ -59,6 +59,7 @@ class TestQuery(unittest.TestCase):
     def setUp(self):
         self.today = date(2016, 6, 10)
 
+    @unittest.skip('WIP')
     def test(self):
         conn = initialize_db(':memory:')
         full_populate_tables(conn)
