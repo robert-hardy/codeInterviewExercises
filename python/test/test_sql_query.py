@@ -55,10 +55,13 @@ def full_populate_tables(conn):
     populate_order_table(conn, order_rows)
 
 
-class TestGroupBy(unittest.TestCase):
+class TestQuery(unittest.TestCase):
+    def setUp(self):
+        self.today = date(2016, 6, 10)
+
     def test(self):
         conn = initialize_db(':memory:')
         full_populate_tables(conn)
-        results = get_books_that_are_not_selling_well(conn)
+        results = get_books_that_are_not_selling_well(conn, self.today)
         products = [ r['product_id'] for r in results ]
-        self.assertEqual(products, [103])
+        self.assertEqual(products, [103, 105])

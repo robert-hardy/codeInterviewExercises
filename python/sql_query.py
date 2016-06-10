@@ -72,9 +72,12 @@ def get_books_that_are_not_selling_well(conn, today_date=None):
     if today_date is None:
         today_date = date.today()
     query = """
-        SELECT client_order.product_id, SUM(quantity) as total_sold
+        SELECT
+            client_order.product_id,
+            available_from as release_date,
+            SUM(quantity) as total_sold_in_last_year
         FROM
-            client_order JOIN product
+            product LEFT JOIN client_order
             ON client_order.product_id = product.product_id
         WHERE
             dispatch_date > date('{now}', '-1 years')
