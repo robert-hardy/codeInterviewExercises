@@ -73,18 +73,33 @@ def get_books_that_are_not_selling_well(conn, today_date=None):
         today_date = date.today()
     query = """
         SELECT
-            client_order.product_id,
-            available_from as release_date,
-            SUM(quantity) as total_sold_in_last_year
-        FROM
-            product LEFT JOIN client_order
-            ON client_order.product_id = product.product_id
+            a.product_id as product_id,
+            a.total_sold_in_last_year as total_sold_in_last_year
+        FROM (
+            SELECT
+                product.product_id,
+                available_from as release_date,
+                SUM (
+                    CASE
+                        WHEN
+                            client_order.dispatch_date < date('{now}', '-1 years')
+                            OR
+                            client_order.dispatch_date IS NULL
+                        THEN
+                            0
+                        ELSE
+                            client_order.quantity
+                    END
+                ) as total_sold_in_last_year
+            FROM
+                product LEFT OUTER JOIN client_order
+                ON product.product_id = client_order.product_id
+            WHERE
+                available_from < date('{now}', '-1 months')
+            GROUP BY client_order.product_id
+        ) a
         WHERE
-            dispatch_date > date('{now}', '-1 years')
-        AND
-            available_from < date('{now}', '-1 months')
-        GROUP BY client_order.product_id
-        HAVING SUM(quantity) < 10
+            a.total_sold_in_last_year < 10
     """.format(now=today_date.isoformat())
     cur.execute(query)
     return cur.fetchall()

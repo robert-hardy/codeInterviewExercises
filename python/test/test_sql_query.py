@@ -59,10 +59,11 @@ class TestQuery(unittest.TestCase):
     def setUp(self):
         self.today = date(2016, 6, 10)
 
-    @unittest.skip("Work in progress")
     def test(self):
         conn = initialize_db(':memory:')
         full_populate_tables(conn)
         results = get_books_that_are_not_selling_well(conn, self.today)
-        products = [ r['product_id'] for r in results ]
-        self.assertEqual(products, [103, 105])
+        self.assertEqual(results, [
+            {'product_id': 103, 'total_sold_in_last_year': 1},
+            {'product_id': 105, 'total_sold_in_last_year': 0}
+        ])
