@@ -69,7 +69,19 @@ class TestQuery(unittest.TestCase):
         ])
 
 
-class TestNoOrders(unittest.TestCase):
+class TestLeftOuterJoinReturnsRowsForEachBook(unittest.TestCase):
+    def execute_query(self):
+        cur = self.conn.cursor()
+        cur.execute("""
+            SELECT
+                *
+            FROM
+                product LEFT OUTER JOIN client_order
+                ON product.product_id = client_order.product_id;
+        """)
+        results = [ (r['name'], r['quantity']) for r in cur.fetchall() ]
+        return results
+
     def setUp(self):
         self.conn = initialize_db(':memory:')
         product_rows = [
@@ -82,17 +94,8 @@ class TestNoOrders(unittest.TestCase):
         populate_product_table(self.conn, product_rows)
         self.today = date(2016, 6, 10)
 
-    def test_outer_join(self):
-        cur = self.conn.cursor()
-        cur.execute("""
-            SELECT
-                *
-            FROM
-                product LEFT OUTER JOIN client_order
-                ON product.product_id = client_order.product_id;
-        """)
-        results = [ (r['name'], r['quantity']) for r in cur.fetchall() ]
-        self.maxDiff = 2000
+    def test_no_orders_at_all(self):
+        results = self.execute_query()
         self.assertEqual(results, [
             (u'book1', None),
             (u'book2', None),
@@ -101,34 +104,12 @@ class TestNoOrders(unittest.TestCase):
             (u'book5', None)
         ])
 
-class TestOneBookWithOneOrder(unittest.TestCase):
-    def setUp(self):
-        self.conn = initialize_db(':memory:')
-        product_rows = [
-            (101, "book1", 91, "2016-05-15"),
-            (102, "book2", 92, "2017-06-01"),
-            (103, "book3", 93, "2016-03-01"),
-            (104, "book4", 94, "2014-06-01"),
-            (105, "book5", 95, "2015-06-01")
-        ]
+    def test_one_book_with_one_order(self):
         order_rows = [
             (1000, 101, 1,  91, "2016-04-01")
         ]
-        populate_product_table(self.conn, product_rows)
         populate_order_table(self.conn, order_rows)
-        self.today = date(2016, 6, 10)
-
-    def test_outer_join(self):
-        cur = self.conn.cursor()
-        cur.execute("""
-            SELECT
-                *
-            FROM
-                product LEFT OUTER JOIN client_order
-                ON product.product_id = client_order.product_id;
-        """)
-        results = [ (r['name'], r['quantity']) for r in cur.fetchall() ]
-        self.maxDiff = 2000
+        results = self.execute_query()
         self.assertEqual(results, [
             (u'book1', 1),
             (u'book2', None),
