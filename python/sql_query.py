@@ -58,6 +58,8 @@ def dict_factory(cur, row):
 
 
 def initialize_db(filename):
+    # These first two lines mean that we will get rows back as dicts and
+    # dates as Python datetime.date objects.
     conn = sqlite.connect(filename, detect_types=sqlite.PARSE_DECLTYPES)
     conn.row_factory = dict_factory
     create_tables(conn)
