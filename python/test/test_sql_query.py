@@ -48,9 +48,10 @@ def full_populate_tables(conn):
         (1000, 101, 1,  91, "2016-04-01"),
         (1001, 103, 1,  92, "2016-05-01"),
         (1002, 101, 10, 93, "2015-05-01"),
-        (1003, 104, 11, 94, "2016-01-01"),
+        (1003, 104, 5, 94, "2016-01-01"),
         (1004, 105, 11, 95, "2014-06-01"),
-        (1005, 103, 1,  92, "2016-05-01")
+        (1005, 103, 1,  92, "2016-05-01"),
+        (1007, 104, 6,  92, "2016-05-01")
     ]
     populate_product_table(conn, product_rows)
     populate_order_table(conn, order_rows)
@@ -66,6 +67,7 @@ class TestQuery(unittest.TestCase):
         results = get_books_that_are_not_selling_well(conn, self.today)
         self.assertEqual(results, [
             {'product_id': 103, 'total_orders_in_last_year': 2},
+            {'product_id': 104, 'total_orders_in_last_year': 6},
             {'product_id': 105, 'total_orders_in_last_year': 0}
         ])
 
@@ -143,5 +145,16 @@ class TestQueryBeforeGroupBy(unittest.TestCase):
             (u'book3', 1),
             (u'book3', 1),
             (u'book4', 11),
+            (u'book5', 0)
+        ])
+
+    def test_with_book4_having_two_small_orders(self):
+        full_populate_tables(self.conn)
+        results = self.execute_query()
+        self.assertEqual(results, [
+            (u'book3', 1),
+            (u'book3', 1),
+            (u'book4', 5),
+            (u'book4', 6),
             (u'book5', 0)
         ])

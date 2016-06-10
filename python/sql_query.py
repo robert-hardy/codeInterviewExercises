@@ -95,9 +95,9 @@ def get_books_that_are_not_selling_well(conn, today_date=None):
             WHERE
                 available_from < date('{now}', '-1 months')
             ) AS a
-        WHERE
-            a.order_size_in_last_year < 10
         GROUP BY product_id
+        HAVING
+            SUM(order_size_in_last_year) < 10
     """.format(now=today_date.isoformat())
     cur.execute(query)
     return cur.fetchall()
