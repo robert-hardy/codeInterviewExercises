@@ -8,7 +8,34 @@ from sql_query import (
     populate_order_table
 )
 
-def populate_tables(conn):
+class TestDBInitialize(unittest.TestCase):
+    def setUp(self):
+        self.conn = initialize_db(':memory:')
+        product_rows = [
+            (101, "book1", 91, "2016-05-15"),
+            (102, "book2", 92, "2017-06-01")
+        ]
+        order_rows = [
+            (1000, 101, 1,  91, "2016-04-01"),
+            (1001, 103, 1,  92, "2016-05-01")
+        ]
+        populate_product_table(self.conn, product_rows)
+        populate_order_table(self.conn, order_rows)
+
+    def test_product_table(self):
+        cur = self.conn.cursor()
+        cur.execute("SELECT name FROM product;")
+        product_names = set([ r['name'] for r in cur.fetchall() ])
+        self.assertEqual(product_names, set(['book1', 'book2']))
+
+    def test_order_table(self):
+        cur = self.conn.cursor()
+        cur.execute("SELECT quantity FROM client_order;")
+        quantity = set([ r['quantity'] for r in cur.fetchall() ])
+        self.assertEqual(quantity, set([1, 1]))
+
+
+def full_populate_tables(conn):
     product_rows = [
         (101, "book1", 91, "2016-05-15"),
         (102, "book2", 92, "2017-06-01"),
@@ -26,36 +53,11 @@ def populate_tables(conn):
     populate_product_table(conn, product_rows)
     populate_order_table(conn, order_rows)
 
-class TestDBInitialize(unittest.TestCase):
-    def setUp(self):
-        self.conn = initialize_db(':memory:')
-        populate_tables(self.conn)
-        self.cur = self.conn.cursor()
-
-    def test_product_table(self):
-        self.cur.execute("""
-            SELECT name FROM product;
-        """)
-        results = self.cur.fetchall()
-        product_names = set([ r['name'] for r in results ])
-        self.assertEqual(product_names,
-            set(['book1', 'book2', 'book3', 'book4', 'book5'])
-        )
-
-    def test_order_table(self):
-        self.cur.execute("""
-            SELECT quantity FROM client_order;
-        """)
-        results = self.cur.fetchall()
-        quantity = set([ r['quantity'] for r in results ])
-        self.assertEqual(quantity,
-            set([1, 1, 10, 11, 11])
-        )
 
 class TestGroupBy(unittest.TestCase):
     def setUp(self):
         self.conn = initialize_db(':memory:')
-        populate_tables(self.conn)
+        full_populate_tables(self.conn)
         self.cur = self.conn.cursor()
 
     def test(self):
