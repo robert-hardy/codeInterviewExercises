@@ -64,3 +64,17 @@ def initialize_db(filename):
     conn.row_factory = dict_factory
     create_tables(conn)
     return conn
+
+def get_books_that_are_not_selling_well(conn):
+    cur = conn.cursor()
+    cur.execute("""
+        SELECT client_order.product_id, SUM(quantity) as total_sold
+        FROM
+            client_order JOIN product
+            ON client_order.product_id = product.product_id
+        WHERE julianday(date('now')) - julianday(available_from) > 30
+        AND julianday(date('now')) - julianday(dispatch_date) < 90
+        GROUP BY client_order.product_id
+        HAVING SUM(quantity) < 10
+    """)
+    return cur.fetchall()

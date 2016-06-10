@@ -5,7 +5,8 @@ from datetime import date
 from sql_query import (
     initialize_db,
     populate_product_table,
-    populate_order_table
+    populate_order_table,
+    get_books_that_are_not_selling_well
 )
 
 class TestDBInitialize(unittest.TestCase):
@@ -55,31 +56,9 @@ def full_populate_tables(conn):
 
 
 class TestGroupBy(unittest.TestCase):
-    def setUp(self):
-        self.conn = initialize_db(':memory:')
-        full_populate_tables(self.conn)
-        self.cur = self.conn.cursor()
-
     def test(self):
-        self.cur.execute("""
-            SELECT client_order.product_id, SUM(quantity) as total_sold
-            FROM
-                client_order JOIN product
-                ON client_order.product_id = product.product_id
-            WHERE julianday(date('now')) - julianday(available_from) > 30
-            AND julianday(date('now')) - julianday(dispatch_date) < 90
-            GROUP BY client_order.product_id
-            HAVING SUM(quantity) < 10
-        """)
-        results = self.cur.fetchall()
+        conn = initialize_db(':memory:')
+        full_populate_tables(conn)
+        results = get_books_that_are_not_selling_well(conn)
         products = [ r['product_id'] for r in results ]
         self.assertEqual(products, [103])
-
-    def test_books_older_than_1_month(self):
-        self.cur.execute("""
-            SELECT *
-            FROM product
-            WHERE julianday(date('now')) - julianday(available_from) > 30
-        """)
-        results = self.cur.fetchall()
-        self.assertNotEqual(results, [])
