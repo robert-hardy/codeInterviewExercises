@@ -74,12 +74,23 @@ class TestLeftOuterJoinReturnsRowsForEachBook(unittest.TestCase):
         cur = self.conn.cursor()
         cur.execute("""
             SELECT
-                *
+                name,
+                (CASE
+                    WHEN
+                        client_order.dispatch_date < date('{now}', '-1 years')
+                        OR
+                        client_order.dispatch_date IS NULL
+                    THEN
+                        0
+                    ELSE
+                        client_order.quantity
+                END
+                ) as total_sold_in_last_year
             FROM
                 product LEFT OUTER JOIN client_order
                 ON product.product_id = client_order.product_id;
-        """)
-        results = [ (r['name'], r['quantity']) for r in cur.fetchall() ]
+        """.format(now=self.today.isoformat()))
+        results = [ (r['name'], r['total_sold_in_last_year']) for r in cur.fetchall() ]
         return results
 
     def setUp(self):
@@ -97,11 +108,11 @@ class TestLeftOuterJoinReturnsRowsForEachBook(unittest.TestCase):
     def test_no_orders_at_all(self):
         results = self.execute_query()
         self.assertEqual(results, [
-            (u'book1', None),
-            (u'book2', None),
-            (u'book3', None),
-            (u'book4', None),
-            (u'book5', None)
+            (u'book1', 0),
+            (u'book2', 0),
+            (u'book3', 0),
+            (u'book4', 0),
+            (u'book5', 0)
         ])
 
     def test_one_book_with_one_order(self):
@@ -112,10 +123,10 @@ class TestLeftOuterJoinReturnsRowsForEachBook(unittest.TestCase):
         results = self.execute_query()
         self.assertEqual(results, [
             (u'book1', 1),
-            (u'book2', None),
-            (u'book3', None),
-            (u'book4', None),
-            (u'book5', None)
+            (u'book2', 0),
+            (u'book3', 0),
+            (u'book4', 0),
+            (u'book5', 0)
         ])
 
     def test_lots_of_orders(self):
@@ -130,9 +141,9 @@ class TestLeftOuterJoinReturnsRowsForEachBook(unittest.TestCase):
         results = self.execute_query()
         self.assertEqual(results, [
             (u'book1', 1),
-            (u'book1', 10),
-            (u'book2', None),
+            (u'book1', 0),
+            (u'book2', 0),
             (u'book3', 1),
             (u'book4', 11),
-            (u'book5', 11)
+            (u'book5', 0)
         ])
