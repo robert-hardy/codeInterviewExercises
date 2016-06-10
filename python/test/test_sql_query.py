@@ -49,7 +49,8 @@ def full_populate_tables(conn):
         (1001, 103, 1,  92, "2016-05-01"),
         (1002, 101, 10, 93, "2015-05-01"),
         (1003, 104, 11, 94, "2016-01-01"),
-        (1004, 105, 11, 95, "2014-06-01")
+        (1004, 105, 11, 95, "2014-06-01"),
+        (1005, 103, 1,  92, "2016-05-01")
     ]
     populate_product_table(conn, product_rows)
     populate_order_table(conn, order_rows)
@@ -64,91 +65,12 @@ class TestQuery(unittest.TestCase):
         full_populate_tables(conn)
         results = get_books_that_are_not_selling_well(conn, self.today)
         self.assertEqual(results, [
-            {'product_id': 103, 'order_size_in_last_year': 1},
+            {'product_id': 103, 'order_size_in_last_year': 2},
             {'product_id': 105, 'order_size_in_last_year': 0}
         ])
 
 
-class TestLeftOuterJoinReturnsRowsForEachBook(unittest.TestCase):
-    def execute_query(self):
-        cur = self.conn.cursor()
-        cur.execute("""
-            SELECT
-                name,
-                (CASE
-                    WHEN
-                        client_order.dispatch_date < date('{now}', '-1 years')
-                        OR
-                        client_order.dispatch_date IS NULL
-                    THEN
-                        0
-                    ELSE
-                        client_order.quantity
-                END
-                ) as order_size_in_last_year
-            FROM
-                product LEFT OUTER JOIN client_order
-                ON product.product_id = client_order.product_id;
-        """.format(now=self.today.isoformat()))
-        results = [ (r['name'], r['order_size_in_last_year']) for r in cur.fetchall() ]
-        return results
-
-    def setUp(self):
-        self.conn = initialize_db(':memory:')
-        product_rows = [
-            (101, "book1", 91, "2016-05-15"),
-            (102, "book2", 92, "2017-06-01"),
-            (103, "book3", 93, "2016-03-01"),
-            (104, "book4", 94, "2014-06-01"),
-            (105, "book5", 95, "2015-06-01")
-        ]
-        populate_product_table(self.conn, product_rows)
-        self.today = date(2016, 6, 10)
-
-    def test_no_orders_at_all(self):
-        results = self.execute_query()
-        self.assertEqual(results, [
-            (u'book1', 0),
-            (u'book2', 0),
-            (u'book3', 0),
-            (u'book4', 0),
-            (u'book5', 0)
-        ])
-
-    def test_one_book_with_one_order(self):
-        order_rows = [
-            (1000, 101, 1,  91, "2016-04-01")
-        ]
-        populate_order_table(self.conn, order_rows)
-        results = self.execute_query()
-        self.assertEqual(results, [
-            (u'book1', 1),
-            (u'book2', 0),
-            (u'book3', 0),
-            (u'book4', 0),
-            (u'book5', 0)
-        ])
-
-    def test_lots_of_orders(self):
-        order_rows = [
-            (1000, 101, 1,  91, "2016-04-01"),
-            (1001, 103, 1,  92, "2016-05-01"),
-            (1002, 101, 10, 93, "2015-05-01"),
-            (1003, 104, 11, 94, "2016-01-01"),
-            (1004, 105, 11, 95, "2014-06-01")
-        ]
-        populate_order_table(self.conn, order_rows)
-        results = self.execute_query()
-        self.assertEqual(results, [
-            (u'book1', 1),
-            (u'book1', 0),
-            (u'book2', 0),
-            (u'book3', 1),
-            (u'book4', 11),
-            (u'book5', 0)
-        ])
-
-class TestAvailableByClause(unittest.TestCase):
+class TestQueryBeforeGroupBy(unittest.TestCase):
     def execute_query(self):
         cur = self.conn.cursor()
         cur.execute("""
@@ -206,17 +128,19 @@ class TestAvailableByClause(unittest.TestCase):
             (u'book5', 0)
         ])
 
-    def test_lots_of_orders(self):
+    def test_with_two_good_orders_for_book3(self):
         order_rows = [
             (1000, 101, 1,  91, "2016-04-01"),
             (1001, 103, 1,  92, "2016-05-01"),
             (1002, 101, 10, 93, "2015-05-01"),
             (1003, 104, 11, 94, "2016-01-01"),
-            (1004, 105, 11, 95, "2014-06-01")
+            (1004, 105, 11, 95, "2014-06-01"),
+            (1005, 103, 1,  92, "2016-05-01")
         ]
         populate_order_table(self.conn, order_rows)
         results = self.execute_query()
         self.assertEqual(results, [
+            (u'book3', 1),
             (u'book3', 1),
             (u'book4', 11),
             (u'book5', 0)
