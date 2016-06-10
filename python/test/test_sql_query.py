@@ -32,39 +32,19 @@ class TestDBInitialize(unittest.TestCase):
         populate_tables(self.conn)
         self.cur = self.conn.cursor()
 
-    def test_tables_exist(self):
-        self.cur.execute("""
-            SELECT name FROM sqlite_master WHERE type='table';
-        """)
-        results = self.cur.fetchall()
-        table_names = set([ r['name'] for r in results ])
-        self.assertEqual(table_names,
-            set(['product', 'client_order'])
-        )
-
     def test_product_table(self):
         self.cur.execute("""
-            SELECT * FROM product;
+            SELECT name FROM product;
         """)
         results = self.cur.fetchall()
         product_names = set([ r['name'] for r in results ])
-        product_dates = set([ r['available_from'] for r in results ])
         self.assertEqual(product_names,
             set(['book1', 'book2', 'book3', 'book4', 'book5'])
-        )
-        self.assertEqual(product_dates,
-            set([
-                date(2016, 5, 15),
-                date(2017, 6, 1),
-                date(2016, 3, 1),
-                date(2014, 6, 1),
-                date(2015, 6, 1)
-            ])
         )
 
     def test_order_table(self):
         self.cur.execute("""
-            SELECT * FROM client_order;
+            SELECT quantity FROM client_order;
         """)
         results = self.cur.fetchall()
         quantity = set([ r['quantity'] for r in results ])
