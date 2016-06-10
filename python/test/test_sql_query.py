@@ -10,6 +10,9 @@ from sql_query import (
 )
 
 class TestDBInitialize(unittest.TestCase):
+    """
+        Make sure that the DB is set up as expected.
+    """
     def setUp(self):
         self.conn = initialize_db(':memory:')
         product_rows = [
@@ -37,6 +40,11 @@ class TestDBInitialize(unittest.TestCase):
 
 
 def execute_inner_query(conn, today):
+    """
+        This is the inner query.
+        It is where most of the work is done and therefore
+        is exposed here for testing purposes.
+    """
     cur = conn.cursor()
     cur.execute("""
         SELECT
@@ -63,9 +71,11 @@ def execute_inner_query(conn, today):
 
 
 class TestInnerQuery(unittest.TestCase):
-    # Checks that we can produce a list, for each not-new book
-    # of the sizes of orders in the last year.
-    # These results will be aggregated in the main query.
+    """
+        Checks that we can produce a list, for each not-new book
+        of the sizes of orders in the last year.
+        These results will be aggregated in the main query.
+    """
     def setUp(self):
         self.conn = initialize_db(':memory:')
         product_rows = [
@@ -131,6 +141,9 @@ class TestInnerQuery(unittest.TestCase):
 
 
 def full_populate_tables(conn):
+    """
+        Data for the DB setup, for main tests.
+    """
     product_rows = [
         (101, "book1", 91, "2016-05-15"),
         (102, "book2", 92, "2017-06-01"),
@@ -142,7 +155,7 @@ def full_populate_tables(conn):
         (1000, 101, 1,  91, "2016-04-01"),
         (1001, 103, 1,  92, "2016-05-01"),
         (1002, 101, 10, 93, "2015-05-01"),
-        (1003, 104, 5, 94, "2016-01-01"),
+        (1003, 104, 5,  94, "2016-01-01"),
         (1004, 105, 11, 95, "2014-06-01"),
         (1005, 103, 1,  92, "2016-05-01"),
         (1007, 104, 6,  92, "2016-05-01")
@@ -152,6 +165,10 @@ def full_populate_tables(conn):
 
 
 class TestQuery(unittest.TestCase):
+    """
+        Test the inner query on the given data.
+        Test the main query on the given data.
+    """
     def setUp(self):
         self.today = date(2016, 6, 10)
         self.conn = initialize_db(':memory:')

@@ -1,3 +1,10 @@
+"""
+This module contains functions for setting up an SQLite database
+and a function for listing the books that have sold fewer than
+10 copies in the last year (as long as they have been available
+for more than a month).
+"""
+
 from datetime import date
 import sqlite3 as sqlite
 
@@ -68,6 +75,11 @@ def initialize_db(filename):
 
 
 def get_books_that_are_not_selling_well(conn, today_date=None):
+    """
+        A function for listing the books that have sold fewer than
+        10 copies in the last year (as long as they have been available
+        for more than a month).
+    """
     cur = conn.cursor()
     if today_date is None:
         today_date = date.today()
