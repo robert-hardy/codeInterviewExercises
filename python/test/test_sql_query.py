@@ -75,6 +75,7 @@ class TestDBInitialize(unittest.TestCase):
 class TestGroupBy(unittest.TestCase):
     def setUp(self):
         self.conn = initialize_db(':memory:')
+        populate_tables(self.conn)
         self.cur = self.conn.cursor()
 
     def test(self):
