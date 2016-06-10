@@ -74,7 +74,7 @@ def get_books_that_are_not_selling_well(conn, today_date=None):
     query = """
         SELECT
             product_id,
-            order_size_in_last_year
+            SUM(order_size_in_last_year) as total_orders_in_last_year
         FROM (
             SELECT
                 product.product_id,
@@ -97,6 +97,7 @@ def get_books_that_are_not_selling_well(conn, today_date=None):
             ) AS a
         WHERE
             a.order_size_in_last_year < 10
+        GROUP BY product_id
     """.format(now=today_date.isoformat())
     cur.execute(query)
     return cur.fetchall()

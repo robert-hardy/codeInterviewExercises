@@ -65,8 +65,8 @@ class TestQuery(unittest.TestCase):
         full_populate_tables(conn)
         results = get_books_that_are_not_selling_well(conn, self.today)
         self.assertEqual(results, [
-            {'product_id': 103, 'order_size_in_last_year': 2},
-            {'product_id': 105, 'order_size_in_last_year': 0}
+            {'product_id': 103, 'total_orders_in_last_year': 2},
+            {'product_id': 105, 'total_orders_in_last_year': 0}
         ])
 
 
