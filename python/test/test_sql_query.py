@@ -67,7 +67,6 @@ class TestQuery(unittest.TestCase):
         results = get_books_that_are_not_selling_well(conn, self.today)
         self.assertEqual(results, [
             {'product_id': 103, 'total_orders_in_last_year': 2},
-            {'product_id': 104, 'total_orders_in_last_year': 6},
             {'product_id': 105, 'total_orders_in_last_year': 0}
         ])
 
