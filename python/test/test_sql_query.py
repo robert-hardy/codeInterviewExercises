@@ -117,3 +117,22 @@ class TestLeftOuterJoinReturnsRowsForEachBook(unittest.TestCase):
             (u'book4', None),
             (u'book5', None)
         ])
+
+    def test_lots_of_orders(self):
+        order_rows = [
+            (1000, 101, 1,  91, "2016-04-01"),
+            (1001, 103, 1,  92, "2016-05-01"),
+            (1002, 101, 10, 93, "2015-05-01"),
+            (1003, 104, 11, 94, "2016-01-01"),
+            (1004, 105, 11, 95, "2014-06-01")
+        ]
+        populate_order_table(self.conn, order_rows)
+        results = self.execute_query()
+        self.assertEqual(results, [
+            (u'book1', 1),
+            (u'book1', 10),
+            (u'book2', None),
+            (u'book3', 1),
+            (u'book4', 11),
+            (u'book5', 11)
+        ])
