@@ -24,6 +24,7 @@ def create_tables(conn):
     """)
     conn.commit()
 
+
 def populate_product_table(conn, rows):
     query = """
         INSERT OR IGNORE INTO product
@@ -31,12 +32,14 @@ def populate_product_table(conn, rows):
     """
     populate_table(conn, query, rows)
 
+
 def populate_order_table(conn, rows):
     query = """
         INSERT OR IGNORE INTO client_order
         VALUES (?, ?, ?, ?, ?)
     """
     populate_table(conn, query, rows)
+
 
 def populate_table(conn, query, rows):
     cur = conn.cursor()
@@ -46,11 +49,13 @@ def populate_table(conn, query, rows):
     except:
         raise
 
+
 def dict_factory(cur, row):
     d = {}
     for idx, col in enumerate(cur.description):
         d[col[0]] = row[idx]
     return d
+
 
 def initialize_db(filename):
     conn = sqlite.connect(filename, detect_types=sqlite.PARSE_DECLTYPES)
