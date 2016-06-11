@@ -2,3 +2,4 @@
 *.a
 breakpoints
 run_tests
+build/
