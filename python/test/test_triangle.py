@@ -9,6 +9,6 @@ class Test(unittest.TestCase):
         self.assertEqual(result, 1)
 
     def test_no_triangle(self):
-        A = [ 0 ] * 1000
+        A = [ 0 ] * 100000
         result = solution(A)
         self.assertEqual(result, 0)
