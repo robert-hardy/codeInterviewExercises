@@ -12,3 +12,8 @@ class Test(unittest.TestCase):
         A = [ 0 ] * 100000
         result = solution(A)
         self.assertEqual(result, 0)
+
+    def test_equilateral(self):
+        A = [ 1 ] * 100
+        result = solution(A)
+        self.assertEqual(result, 1)
