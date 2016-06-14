@@ -13,6 +13,8 @@ less than some level N, where N=1000 was given as the exercise).
 * Binary tree: a few different ways to traverse a tree, for example using
 `yield` (inspired by a StackOverflow answer
 [here](http://stackoverflow.com/a/26952125/1243435)).
+* [Triangle](https://codility.com/programmers/task/triangle/): find a triplet
+of numbers in an array that could be the lengths of the sides of a triangle.
 
 Other snippets
 ======
